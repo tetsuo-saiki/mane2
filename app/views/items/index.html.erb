@@ -1,0 +1,57 @@
+<h1>Items#index</h1>
+<p>Find me in app/views/items/index.html.erb</p>
+
+<%= form_for(@item, :url => {:action => 'create'}) do |f| %>
+
+  <% if false %>
+    <ul>
+      <%= @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.select :item_type_id, @item_type_id, {}, {class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field :price, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.date_field :date, class: 'form-control' %>
+  </div>
+    
+  <div class="form-group">
+    <%= f.submit "submit", class:'btn btn-primary' %>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>title</th>
+    <th>price</th>
+    <th>image</th>
+    <th>date</th>
+    <th></th>
+  </thead>
+  <% if @items %>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>
+          <td><%= item.title %></td>
+          <td><%= item.price %></td>
+          <td><% if item.image_url %><%= item.image_url %><% end %></td>
+          <td><%= item.date %></td>
+          <td><%= link_to "delete", item, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    There is no items.
+  <% end %>
+</table>

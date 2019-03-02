@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
     @items = current_user.items.order('created_at desc')
     @item = current_user.items.build
     @item_type_id = ItemType.pluck('item_type', 'id')
+    @date = Date.today
   end
 
   def create

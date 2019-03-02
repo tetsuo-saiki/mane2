@@ -1,0 +1,47 @@
+<h1>user_Assets#index</h1>
+<p>Find me in app/views/user_assets/index.html.erb</p>
+
+<%= form_for(@user_asset, :url => {:action => 'create'}) do |f| %>
+
+  <% if false %>
+    <ul>
+      <%= @user_asset.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field :asset_amount, {placeholder: "asset_amount", class: 'form-control'} %>
+  </div>
+    
+  <div class="form-group">
+    <%= f.submit "submit", class:'btn btn-primary' %>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>title</th>
+    <th>asset_amount</th>
+    <th></th>
+  </thead>
+  <% if @user_assets %>
+    <tbody>
+      <% @user_assets.each do |user_asset| %>
+        <tr>
+          <td><%= user_asset.id %></td>
+          <td><%= user_asset.title %></td>
+          <td><%= user_asset.asset_amount %></td>
+          <td><%= link_to "delete", user_asset, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    There is no user_assets.
+  <% end %>
+</table>

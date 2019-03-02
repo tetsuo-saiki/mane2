@@ -43,7 +43,7 @@
       <% @items.each do |item| %>
         <tr>
           <td><%= item.id %></td>
-          <td><%= item.title %></td>
+          <td><%= link_to "#{item.title}", item_path(item) %></td>
           <td><%= item.price %></td>
           <td><% if item.image_url %><%= item.image_url %><% end %></td>
           <td><%= item.date %></td>
@@ -55,3 +55,5 @@
     There is no items.
   <% end %>
 </table>
+
+<%= link_to "back", root_path, class: 'btn btn-default' %>

@@ -1,0 +1,54 @@
+<h1>incomes#index</h1>
+<p>Find me in app/views/incomes/index.html.erb</p>
+
+<%= form_for(@income, :url => {:action => 'create'}) do |f| %>
+
+  <% if false %>
+    <ul>
+      <%= @income.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field :income_amount, {placeholder: "income_amount", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.date_field :income_date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
+  </div>
+    
+  <div class="form-group">
+    <%= f.submit "submit", class:'btn btn-primary' %>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>title</th>
+    <th>income_amount</th>
+    <th>income_date</th>
+    <th></th>
+  </thead>
+  <% if @incomes %>
+    <tbody>
+      <% @incomes.each do |income| %>
+        <tr>
+          <td><%= income.id %></td>
+          <td><%= income.title %></td>
+          <td><%= income.income_amount %></td>
+          <td><%= income.income_date %></td>
+          <td><%= link_to "delete", income, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    There is no incomes.
+  <% end %>
+</table>
+
+<%= link_to "back", root_path, class: 'btn btn-default' %>

@@ -1,0 +1,70 @@
+<h1>CreditCards#index</h1>
+<p>Find me in app/views/credit_cards/index.html.erb</p>
+
+<%= form_for(@credit_card, :url => {:action => 'create'}) do |f| %>
+
+  <% if false %>
+    <ul>
+      <%= @credit_card.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :use_period, "use_period" %>
+    <%= f.date_field :use_period, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field :use_border, {placeholder: "use_border", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field :using_border, {placeholder: "using_border", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field :withdrawal_amount, {placeholder: "withdrawal_amount", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.date_field :withdrawal_date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
+  </div>
+    
+  <div class="form-group">
+    <%= f.submit "submit", class:'btn btn-primary' %>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>title</th>
+    <th>use_period</th>
+    <th>use_border</th>
+    <th>using_border</th>
+    <th>withdrawal_amount</th>
+    <th>withdrawal_date</th>
+    <th></th>
+  </thead>
+  <% if @credit_cards %>
+    <tbody>
+      <% @credit_cards.each do |credit_card| %>
+        <tr>
+          <td><%= credit_card.id %></td>
+          <td><%= credit_card.title %></td>
+          <td><%= credit_card.use_period %></td>
+          <td><%= credit_card.use_border %></td>
+          <td><%= credit_card.using_border %></td>
+          <td><%= credit_card.withdrawal_amount %></td>
+          <td><%= credit_card.withdrawal_date %></td>
+          <td><%= link_to "delete", credit_card, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    There is no credit_cards.
+  <% end %>
+</table>
+
+<%= link_to "back", root_path, class: 'btn btn-default' %>

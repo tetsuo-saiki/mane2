@@ -22,13 +22,8 @@
     <%= f.number_field :use_border, {placeholder: "use_border", class: 'form-control'} %>
   </div>
   <div class="form-group">
-    <%= f.number_field :using_border, {placeholder: "using_border", class: 'form-control'} %>
-  </div>
-  <div class="form-group">
-    <%= f.number_field :withdrawal_amount, {placeholder: "withdrawal_amount", class: 'form-control'} %>
-  </div>
-  <div class="form-group">
-    <%= f.date_field :withdrawal_date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
+    <%= f.label :withdrawal_date, "withdrawal_date" %>
+    <%= f.select :withdrawal_date, 1..31, {}, {class: 'form-control'} %>
   </div>
     
   <div class="form-group">
@@ -42,8 +37,6 @@
     <th>title</th>
     <th>use_period</th>
     <th>use_border</th>
-    <th>using_border</th>
-    <th>withdrawal_amount</th>
     <th>withdrawal_date</th>
     <th></th>
   </thead>
@@ -55,8 +48,6 @@
           <td><%= credit_card.title %></td>
           <td><%= credit_card.use_period %></td>
           <td><%= credit_card.use_border %></td>
-          <td><%= credit_card.using_border %></td>
-          <td><%= credit_card.withdrawal_amount %></td>
           <td><%= credit_card.withdrawal_date %></td>
           <td><%= link_to "delete", credit_card, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
         </tr>
@@ -67,4 +58,4 @@
   <% end %>
 </table>
 
-<%= link_to "back", root_path, class: 'btn btn-default' %>
+<%= link_to 'back', amount_used_of_credits_path, class: "" %>

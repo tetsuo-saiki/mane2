@@ -1,0 +1,58 @@
+<h1>AmountUsedOfCredit#index</h1>
+<p>Find me in app/views/amount_used_of_credits/index.html.erb</p>
+
+<%= form_for(@amount_used_of_credit, :url => {:action => 'create'}) do |f| %>
+
+  <% if false %>
+    <ul>
+      <%= @amount_used_of_credit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.number_field :using_border, {placeholder: "using_border", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field :withdrawal_amount, {placeholder: "withdrawal_amount", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.select :credit_card_id, @credit_card_id, {}, {class: 'form-control'} %>
+  </div>
+    
+  <div class="form-group">
+    <%= f.submit "submit", class:'btn btn-primary' %>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>using_border</th>
+    <th>withdrawal_amount</th>
+    <th>credit_card</th>
+    <th>created_at</th>
+    <th></th>
+  </thead>
+  <% if @amount_used_of_credits %>
+    <tbody>
+      <% @amount_used_of_credits.each do |amount_used_of_credit| %>
+        <tr>
+          <td><%= amount_used_of_credit.id %></td>
+          <td><%= amount_used_of_credit.using_border %></td>
+          <td><%= amount_used_of_credit.withdrawal_amount %></td>
+          <td><%= amount_used_of_credit.credit_card.title %></td>
+          <td><%= amount_used_of_credit.created_at.strftime("%Y-%m-%d") %></td>
+          <td><%= link_to "delete", amount_used_of_credit, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    There is no amount_used_of_credits.
+  <% end %>
+</table>
+
+<%= link_to 'CreditCard', credit_cards_path, class: "btn btn-default" %>
+
+<%= link_to "back", root_path, class: 'btn btn-default' %>

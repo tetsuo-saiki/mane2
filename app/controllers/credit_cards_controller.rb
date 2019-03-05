@@ -30,7 +30,7 @@ class CreditCardsController < ApplicationController
   private
   
   def credit_card_params
-    params.require(:credit_card).permit(:title, :use_period, :use_border, :using_border, :withdrawal_amount, :withdrawal_date)
+    params.require(:credit_card).permit(:title, :use_period, :use_border, :withdrawal_date)
   end
   
   def correct_user

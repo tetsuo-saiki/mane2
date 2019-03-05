@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :debts, only: [:index, :create, :destroy]
   # credit_cards
   resources :credit_cards, only: [:index, :create, :destroy]
+  # amount_used_of_credits
+  resources :amount_used_of_credits, only: [:index, :create, :destroy]
 end

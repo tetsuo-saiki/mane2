@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_093934) do
+ActiveRecord::Schema.define(version: 2019_03_02_110559) do
+
+  create_table "debts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "debt_total_amount", null: false
+    t.integer "withdrawal_amount", null: false
+    t.string "withdrawal_date"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_debts_on_user_id"
+  end
+
+  create_table "incomes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "income_amount", null: false
+    t.date "income_date", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_incomes_on_user_id"
+  end
 
   create_table "item_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "item_type", default: "", null: false
@@ -52,6 +73,8 @@ ActiveRecord::Schema.define(version: 2019_03_02_093934) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "debts", "users"
+  add_foreign_key "incomes", "users"
   add_foreign_key "items", "item_types"
   add_foreign_key "items", "users"
   add_foreign_key "user_assets", "users"

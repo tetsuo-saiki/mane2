@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :user_assets, only: [:index, :create, :destroy]
   # incomes
   resources :incomes, only: [:index, :create, :destroy]
+  # debts
+  resources :debts, only: [:index, :create, :destroy]
 end

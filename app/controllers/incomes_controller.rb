@@ -3,7 +3,7 @@ class IncomesController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
-    @incomes = current_user.incomes.order('created_at desc')
+    @incomes = search_incomes
     @income = current_user.incomes.build
     @date = Date.today
   end
@@ -39,5 +39,15 @@ class IncomesController < ApplicationController
       redirect_to incomes_path
     end
   end
+
+  def search_incomes
+    if params[:select_month]
+      month = Date.new(params[:select_month]["{}(1i)"].to_i, params[:select_month]["{}(2i)"].to_i)
+      current_user.incomes.where('income_date between ? and ?', month.beginning_of_month, month.end_of_month).order('created_at desc')
+    else
+      current_user.incomes.order('created_at desc')
+    end
+  end
+
 end
   

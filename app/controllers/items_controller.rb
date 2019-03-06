@@ -1,9 +1,13 @@
 class ItemsController < ApplicationController
+  include Common
   before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
 
   def index
-    @items = current_user.items.order('created_at desc')
+    @selected_month = get_selected_month(params[:select_month])
+    @items = search(current_user.items, @selected_month, "date")
+    @sum_monthly_items = sum_monthly_amount(@items, "price")
+
     @item = current_user.items.build
     @item_type_id = ItemType.pluck('item_type', 'id')
     @date = Date.today

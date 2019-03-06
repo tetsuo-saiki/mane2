@@ -14,9 +14,6 @@
   <div class="form-group">
     <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
   </div>
-  <div class="form-group">
-    <%= f.number_field :asset_amount, {placeholder: "asset_amount", class: 'form-control'} %>
-  </div>
     
   <div class="form-group">
     <%= f.submit "submit", class:'btn btn-primary' %>
@@ -27,7 +24,6 @@
   <thead>
     <th>id</th>
     <th>title</th>
-    <th>asset_amount</th>
     <th></th>
   </thead>
   <% if @user_assets %>
@@ -36,7 +32,6 @@
         <tr>
           <td><%= user_asset.id %></td>
           <td><%= user_asset.title %></td>
-          <td><%= user_asset.asset_amount %></td>
           <td><%= link_to "delete", user_asset, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>
@@ -46,4 +41,4 @@
   <% end %>
 </table>
 
-<%= link_to "back", root_path, class: 'btn btn-default' %>
+<%= link_to "back", asset_transitions_path, class: 'btn btn-default' %>

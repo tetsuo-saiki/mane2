@@ -10,15 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_092724) do
+ActiveRecord::Schema.define(version: 2019_03_05_132924) do
+
+  create_table "amount_used_of_credits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "using_border", null: false
+    t.integer "withdrawal_amount", null: false
+    t.bigint "credit_card_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["credit_card_id"], name: "index_amount_used_of_credits_on_credit_card_id"
+    t.index ["user_id"], name: "index_amount_used_of_credits_on_user_id"
+  end
+
+  create_table "asset_transitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "asset_amount", null: false
+    t.date "date", null: false
+    t.bigint "user_asset_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_asset_id"], name: "index_asset_transitions_on_user_asset_id"
+    t.index ["user_id"], name: "index_asset_transitions_on_user_id"
+  end
 
   create_table "credit_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.date "use_period", null: false
     t.integer "use_border", null: false
-    t.integer "using_border", null: false
-    t.integer "withdrawal_amount", null: false
-    t.date "withdrawal_date", null: false
+    t.string "withdrawal_date", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -67,7 +87,6 @@ ActiveRecord::Schema.define(version: 2019_03_05_092724) do
 
   create_table "user_assets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "asset_amount", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -86,6 +105,10 @@ ActiveRecord::Schema.define(version: 2019_03_05_092724) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "amount_used_of_credits", "credit_cards"
+  add_foreign_key "amount_used_of_credits", "users"
+  add_foreign_key "asset_transitions", "user_assets"
+  add_foreign_key "asset_transitions", "users"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "debts", "users"
   add_foreign_key "incomes", "users"

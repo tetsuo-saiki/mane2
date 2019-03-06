@@ -1,0 +1,57 @@
+<h1>AssetTransition#index</h1>
+<p>Find me in app/views/asset_transitions/index.html.erb</p>
+
+<%= form_for(@asset_transition, :url => {:action => 'create'}) do |f| %>
+
+  <% if false %>
+    <ul>
+      <%= @asset_transition.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.number_field :asset_amount, {placeholder: "asset_amount", class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.date_field :date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.select :user_asset_id, @user_asset_id, {}, {class: 'form-control'} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "submit", class:'btn btn-primary' %>
+  </div>
+
+<% end %>
+
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>asset_amount</th>
+    <th>user_asset</th>
+    <th>date</th>
+    <th></th>
+  </thead>
+  <% if @asset_transitions %>
+    <tbody>
+      <% @asset_transitions.each do |asset_transition| %>
+        <tr>
+          <td><%= asset_transition.id %></td>
+          <td><%= asset_transition.asset_amount %></td>
+          <td><%= asset_transition.user_asset.title %></td>
+          <td><%= asset_transition.date.strftime("%Y-%m-%d") %></td>
+          <td><%= link_to "delete", asset_transition, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    There is no asset_transitions.
+  <% end %>
+</table>
+
+<%= link_to 'UserAsset', user_assets_path, class: "btn btn-default" %>
+
+<%= link_to "back", root_path, class: 'btn btn-default' %>

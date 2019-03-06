@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :items, dependent: :destroy
   has_many :user_assets, dependent: :destroy
+  has_many :asset_transitions, dependent: :destroy
   has_many :incomes, dependent: :destroy
   has_many :debts, dependent: :destroy
   has_many :credit_cards, dependent: :destroy

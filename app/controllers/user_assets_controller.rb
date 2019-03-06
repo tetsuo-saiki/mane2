@@ -29,7 +29,7 @@ class UserAssetsController < ApplicationController
   private
   
   def user_asset_params
-    params.require(:user_asset).permit(:title, :asset_amount)
+    params.require(:user_asset).permit(:title)
   end
   
   def correct_user

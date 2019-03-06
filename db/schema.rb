@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_132924) do
+ActiveRecord::Schema.define(version: 2019_03_06_105926) do
 
   create_table "amount_used_of_credits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "using_border", null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_132924) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "withdrawal_date"
     t.index ["credit_card_id"], name: "index_amount_used_of_credits_on_credit_card_id"
     t.index ["user_id"], name: "index_amount_used_of_credits_on_user_id"
   end
@@ -85,6 +86,17 @@ ActiveRecord::Schema.define(version: 2019_03_05_132924) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "monthly_flows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "monthly_income_in_sum", null: false
+    t.integer "month_disbursement_sum", null: false
+    t.string "year", null: false
+    t.string "month", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_monthly_flows_on_user_id"
+  end
+
   create_table "user_assets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "user_id"
@@ -114,5 +126,6 @@ ActiveRecord::Schema.define(version: 2019_03_05_132924) do
   add_foreign_key "incomes", "users"
   add_foreign_key "items", "item_types"
   add_foreign_key "items", "users"
+  add_foreign_key "monthly_flows", "users"
   add_foreign_key "user_assets", "users"
 end

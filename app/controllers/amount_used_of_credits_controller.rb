@@ -1,9 +1,13 @@
 class AmountUsedOfCreditsController < ApplicationController
+  include Common
   before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
   
   def index
-    @amount_used_of_credits = current_user.amount_used_of_credits.order('created_at desc')
+    @selected_month = get_selected_month(params[:select_month])
+    @amount_used_of_credits = search(current_user.amount_used_of_credits, @selected_month, "withdrawal_date")
+    @sum_monthly_amount_used_of_credits = sum_monthly_amount(@amount_used_of_credits, "withdrawal_amount")
+
     @amount_used_of_credit = current_user.amount_used_of_credits.build
     @credit_card_id = CreditCard.pluck('title', 'id')
     @date = Date.today
@@ -31,7 +35,7 @@ class AmountUsedOfCreditsController < ApplicationController
   private
   
   def amount_used_of_credit_params
-    params.require(:amount_used_of_credit).permit(:using_border, :withdrawal_amount, :credit_card_id)
+    params.require(:amount_used_of_credit).permit(:using_border, :withdrawal_amount, :credit_card_id, :withdrawal_date)
   end
   
   def correct_user

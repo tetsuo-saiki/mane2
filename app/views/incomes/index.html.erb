@@ -1,6 +1,10 @@
 <h1>incomes#index</h1>
 <p>Find me in app/views/incomes/index.html.erb</p>
 
+<% if @sum_monthly_incomes %>
+  <%= @selected_month.year %>年<%= @selected_month.month %>月の収入　： <%= @sum_monthly_incomes %>
+<% end %>
+
 <%= form_tag('/incomes', :method => :get) do %>
   <div class="form-group">
     <%= date_select :select_month, {}, class: 'form-control', discard_day: true %>

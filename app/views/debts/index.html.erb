@@ -28,6 +28,10 @@
   <div class="form-group">
     <%= f.select :withdrawal_date, 1..31, {}, {class: 'form-control'} %>
   </div>
+  <div class="form-group">
+    <%= f.label :full_payment_date, "full_payment_date" %>
+    <%= f.date_field :full_payment_date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
+  </div>
     
   <div class="form-group">
     <%= f.submit "submit", class:'btn btn-primary' %>
@@ -41,6 +45,7 @@
     <th>debt_total_amount</th>
     <th>debt_withdrawal</th>
     <th>withdrawal_date</th>
+    <th>full_payment_date</th>
     <th></th>
   </thead>
   <% if @debts %>
@@ -52,6 +57,7 @@
           <td><%= debt.debt_total_amount %></td>
           <td><%= debt.debt_withdrawal %></td>
           <td><%= debt.withdrawal_date %></td>
+          <td><%= debt.full_payment_date %></td>
           <td><%= link_to "delete", debt, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>

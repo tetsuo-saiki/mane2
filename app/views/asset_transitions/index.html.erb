@@ -42,7 +42,7 @@
           <td><%= asset_transition.id %></td>
           <td><%= asset_transition.asset_amount %></td>
           <td><%= asset_transition.user_asset.title %></td>
-          <td><%= asset_transition.date.strftime("%Y-%m-%d") %></td>
+          <td><%= asset_transition.date.strftime("%Y-%m-%d") if asset_transition.date %></td>
           <td><%= link_to "delete", asset_transition, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>

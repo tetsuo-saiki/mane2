@@ -65,7 +65,7 @@
           <td><%= amount_used_of_credit.using_border %></td>
           <td><%= amount_used_of_credit.credit_withdrawal %></td>
           <td><%= amount_used_of_credit.credit_card.title %></td>
-          <td><%= amount_used_of_credit.withdrawal_date.strftime("%Y-%m-%d") %></td>
+          <td><%= amount_used_of_credit.withdrawal_date.strftime("%Y-%m-%d") if amount_used_of_credit.withdrawal_date %></td>
           <td><%= link_to "delete", amount_used_of_credit, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>

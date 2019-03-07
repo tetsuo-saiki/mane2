@@ -17,8 +17,30 @@ module Common
     end
   end
 
-  # 選択月の値合計
-  def sum_monthly_amount(model_object, sum_column)
+  # 各モデルの選択月の値合計
+  def sum_monthly_amount_of_model(model_object, sum_column)
     model_object.sum(sum_column)
   end
+
+  # monthly_flow テーブルに月のフローを登録
+  def create_or_update_monthly_flow(model_object, sum_column, selected_month)
+    if selected_month
+      monthly_sum = sum_monthly_amount_of_model(model_object, sum_column)
+      target_column = "#{sum_column}_sum"
+      monthly_flow = current_user.monthly_flows.where(["year = ? and month = ?", selected_month.year, selected_month.month]).first
+      if monthly_flow
+        monthly_flow.send("#{target_column}=", monthly_sum) # send にて動的に attributes に値を代入
+        monthly_flow.save!
+      else
+        monthly_flow = current_user.monthly_flows.build
+        monthly_flow.send("#{target_column}=", monthly_sum) # send にて動的に attributes に値を代入
+        monthly_flow.year = selected_month.year
+        monthly_flow.month = selected_month.month
+        monthly_flow.save!
+      end
+    end
+  end
+
+  private
+
 end

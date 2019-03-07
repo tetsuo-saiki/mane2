@@ -16,6 +16,8 @@ class AmountUsedOfCreditsController < ApplicationController
   def create
     @amount_used_of_credit = current_user.amount_used_of_credits.build(amount_used_of_credit_params)
     if @amount_used_of_credit.save
+      reflect_monthly_flow(@amount_used_of_credit.withdrawal_date)
+
       flash[:notice] = '正常に保存しました。'
       redirect_to amount_used_of_credits_path
     else
@@ -27,7 +29,11 @@ class AmountUsedOfCreditsController < ApplicationController
   end
   
   def destroy
+    # 削除前に日付を取得
+    withdrawal_date = @amount_used_of_credit.withdrawal_date
     @amount_used_of_credit.destroy
+
+    reflect_monthly_flow(withdrawal_date)
     flash[:notice] = '項目を削除しました。'
     redirect_to amount_used_of_credits_path
   end
@@ -43,6 +49,11 @@ class AmountUsedOfCreditsController < ApplicationController
     unless @amount_used_of_credit
       redirect_to amount_used_of_credits_path
     end
+  end
+  
+  def reflect_monthly_flow(withdrawal_date)
+    amount_used_of_credits = search(current_user.amount_used_of_credits, withdrawal_date, "withdrawal_date")
+    create_or_update_monthly_flow(amount_used_of_credits, "credit_withdrawal", withdrawal_date)
   end
 end
   

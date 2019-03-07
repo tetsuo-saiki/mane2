@@ -14,6 +14,8 @@ class IncomesController < ApplicationController
   def create
     @income = current_user.incomes.build(income_params)
     if @income.save
+      reflect_monthly_flow(@income.income_date)
+
       flash[:notice] = '正常に保存しました。'
       redirect_to incomes_path
     else
@@ -25,7 +27,11 @@ class IncomesController < ApplicationController
   end
   
   def destroy
+    # 削除前に日付を取得
+    income_date = @income.income_date
     @income.destroy
+
+    reflect_monthly_flow(income_date)
     flash[:notice] = '項目を削除しました。'
     redirect_to incomes_path
   end
@@ -41,6 +47,11 @@ class IncomesController < ApplicationController
     unless @income
       redirect_to incomes_path
     end
+  end
+
+  def reflect_monthly_flow(income_date)
+    incomes = search(current_user.incomes, income_date, "income_date")
+    create_or_update_monthly_flow(incomes, "income_amount", income_date)
   end
 end
   

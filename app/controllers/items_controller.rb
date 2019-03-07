@@ -16,6 +16,8 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
     if @item.save
+      reflect_monthly_flow(@item.date)
+
       flash[:notice] = '正常に保存しました。'
       redirect_to item_path(@item)
     else
@@ -31,7 +33,12 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    # 削除前に日付を取得
+    date = @item.date
     @item.destroy
+
+    reflect_monthly_flow(date)
+
     flash[:notice] = '項目を削除しました。'
     redirect_to items_path
   end
@@ -47,5 +54,10 @@ class ItemsController < ApplicationController
     unless @item
       redirect_to items_path
     end
+  end
+
+  def reflect_monthly_flow(date)
+    items = search(current_user.items, date, "date")
+    create_or_update_monthly_flow(items, "price", date)
   end
 end

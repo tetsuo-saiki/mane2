@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   def index
     @selected_month = get_selected_month(params[:select_month])
     @items = search(current_user.items, @selected_month, "date")
-    @sum_monthly_items = sum_monthly_amount(@items, "price")
+    @sum_monthly_items = sum_monthly_amount_of_model(@items, "price")
 
     @item = current_user.items.build
     @item_type_id = ItemType.pluck('item_type', 'id')

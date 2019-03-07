@@ -1,0 +1,2 @@
+class MonthlyFlow < ApplicationRecord
+end

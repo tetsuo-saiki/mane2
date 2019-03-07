@@ -1,9 +1,12 @@
 class DebtsController < ApplicationController
+  include Common
   before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
   
   def index
     @debts = current_user.debts.order('created_at desc')
+    @sum_monthly_debts = sum_monthly_amount_of_model(@debts, "debt_withdrawal")
+
     @debt = current_user.debts.build
     @date = Date.today
   end
@@ -30,7 +33,7 @@ class DebtsController < ApplicationController
   private
   
   def debt_params
-    params.require(:debt).permit(:title, :debt_total_amount, :withdrawal_amount, :withdrawal_date)
+    params.require(:debt).permit(:title, :debt_total_amount, :debt_withdrawal, :withdrawal_date)
   end
   
   def correct_user

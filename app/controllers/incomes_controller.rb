@@ -6,7 +6,7 @@ class IncomesController < ApplicationController
   def index
     @selected_month = get_selected_month(params[:select_month])
     @incomes = search(current_user.incomes, @selected_month, "income_date")
-    @sum_monthly_incomes = sum_monthly_amount(@incomes, "income_amount")
+    @sum_monthly_incomes = sum_monthly_amount_of_model(@incomes, "income_amount")
     @income = current_user.incomes.build
     @date = Date.today
   end

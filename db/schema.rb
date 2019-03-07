@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_105926) do
 
   create_table "amount_used_of_credits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "using_border", null: false
-    t.integer "withdrawal_amount", null: false
+    t.integer "credit_withdrawal", null: false
     t.bigint "credit_card_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_105926) do
   create_table "debts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.integer "debt_total_amount", null: false
-    t.integer "withdrawal_amount", null: false
+    t.integer "debt_withdrawal", null: false
     t.string "withdrawal_date"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -87,8 +87,10 @@ ActiveRecord::Schema.define(version: 2019_03_06_105926) do
   end
 
   create_table "monthly_flows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "monthly_income_in_sum", null: false
-    t.integer "month_disbursement_sum", null: false
+    t.integer "income_amount_sum", null: false
+    t.integer "price_sum", null: false
+    t.integer "credit_withdrawal_sum", null: false
+    t.integer "debt_withdrawal_sum", null: false
     t.string "year", null: false
     t.string "month", null: false
     t.bigint "user_id"

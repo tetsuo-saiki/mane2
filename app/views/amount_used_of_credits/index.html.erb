@@ -34,7 +34,7 @@
     <%= f.number_field :using_border, {placeholder: "using_border", class: 'form-control'} %>
   </div>
   <div class="form-group">
-    <%= f.number_field :withdrawal_amount, {placeholder: "withdrawal_amount", class: 'form-control'} %>
+    <%= f.number_field :credit_withdrawal, {placeholder: "credit_withdrawal", class: 'form-control'} %>
   </div>
   <div class="form-group">
     <%= f.select :credit_card_id, @credit_card_id, {}, {class: 'form-control'} %>
@@ -52,7 +52,7 @@
   <thead>
     <th>id</th>
     <th>using_border</th>
-    <th>withdrawal_amount</th>
+    <th>credit_withdrawal</th>
     <th>credit_card</th>
     <th>withdrawal_date</th>
     <th></th>
@@ -63,7 +63,7 @@
         <tr>
           <td><%= amount_used_of_credit.id %></td>
           <td><%= amount_used_of_credit.using_border %></td>
-          <td><%= amount_used_of_credit.withdrawal_amount %></td>
+          <td><%= amount_used_of_credit.credit_withdrawal %></td>
           <td><%= amount_used_of_credit.credit_card.title %></td>
           <td><%= amount_used_of_credit.withdrawal_date.strftime("%Y-%m-%d") %></td>
           <td><%= link_to "delete", amount_used_of_credit, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>

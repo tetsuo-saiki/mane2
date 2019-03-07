@@ -1,6 +1,11 @@
 <h1>debts#index</h1>
 <p>Find me in app/views/debts/index.html.erb</p>
 
+<% if @sum_monthly_debts %>
+  毎月の返済額 ： <%= @sum_monthly_debts %>
+<% end %>
+
+
 <%= form_for(@debt, :url => {:action => 'create'}) do |f| %>
 
   <% if false %>
@@ -18,7 +23,7 @@
     <%= f.number_field :debt_total_amount, {placeholder: "debt_total_amount", class: 'form-control'} %>
   </div>
   <div class="form-group">
-    <%= f.number_field :withdrawal_amount, {placeholder: "withdrawal_amount", class: 'form-control'} %>
+    <%= f.number_field :debt_withdrawal, {placeholder: "debt_withdrawal", class: 'form-control'} %>
   </div>
   <div class="form-group">
     <%= f.select :withdrawal_date, 1..31, {}, {class: 'form-control'} %>
@@ -34,7 +39,7 @@
     <th>id</th>
     <th>title</th>
     <th>debt_total_amount</th>
-    <th>withdrawal_amount</th>
+    <th>debt_withdrawal</th>
     <th>withdrawal_date</th>
     <th></th>
   </thead>
@@ -45,7 +50,7 @@
           <td><%= debt.id %></td>
           <td><%= debt.title %></td>
           <td><%= debt.debt_total_amount %></td>
-          <td><%= debt.withdrawal_amount %></td>
+          <td><%= debt.debt_withdrawal %></td>
           <td><%= debt.withdrawal_date %></td>
           <td><%= link_to "delete", debt, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
         </tr>

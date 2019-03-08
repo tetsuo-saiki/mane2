@@ -6,7 +6,6 @@ class DebtsController < ApplicationController
   def index
     @debts = current_user.debts.order('created_at desc')
     @sum_monthly_debts = sum_monthly_amount_of_model(@debts, "debt_withdrawal")
-
     @debt = current_user.debts.build
     @date = Date.today
   end
@@ -14,6 +13,7 @@ class DebtsController < ApplicationController
   def create
     @debt = current_user.debts.build(debt_params)
     if @debt.save
+      reflect_debt_to_monthly_flow
       flash[:notice] = '正常に保存しました。'
       redirect_to debts_path
     else
@@ -26,6 +26,7 @@ class DebtsController < ApplicationController
   
   def destroy
     @debt.destroy
+    reflect_debt_to_monthly_flow
     flash[:notice] = '項目を削除しました。'
     redirect_to debts_path
   end
@@ -42,6 +43,31 @@ class DebtsController < ApplicationController
       redirect_to debts_path
     end
   end
+
+  # not use bulk update (tmp)
+  def reflect_debt_to_monthly_flow
+    monthly_sum = sum_monthly_amount_of_model(current_user.debts, "debt_withdrawal")
+    monthly_flows = current_user.monthly_flows
+    if !monthly_flows.empty?
+      monthly_flows.each do |monthly_flow|
+        monthly_flow.debt_withdrawal_sum = monthly_sum
+        monthly_flow.save!
+      end
+    end
+  end
+  # use bulk update
+  # def reflect_debt_to_monthly_flow
+  #   monthly_sum = sum_monthly_amount_of_model(current_user.debts, "debt_withdrawal")
+  #   monthly_flows = current_user.monthly_flows # 今は期間関係なく全取得している
+  #   if !monthly_flows.empty?
+  #     update_monthly_flows = []
+  #     monthly_flows.each do |monthly_flow|
+  #       monthly_flow.debt_withdrawal_sum = monthly_sum
+  #       update_monthly_flows << monthly_flow
+  #     end
+  #     monthly_flows.import update_monthly_flows, on_duplicate_key_update: [:debt_withdrawal_sum]
+  #   end
+  # end
 end
     
   

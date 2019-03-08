@@ -41,6 +41,11 @@ module Common
     end
   end
 
+  def return_monthly_flow(selected_month)
+    monthly_flow = current_user.monthly_flows.where(["year = ? and month = ?", selected_month.year, selected_month.month]).first
+    monthly_flow.income_amount_sum - monthly_flow.price_sum - monthly_flow.credit_withdrawal_sum - monthly_flow.debt_withdrawal_sum
+  end
+
   private
 
 end

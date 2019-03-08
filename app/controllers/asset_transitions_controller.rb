@@ -1,4 +1,5 @@
 class AssetTransitionsController < ApplicationController
+  include Common
   before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
   
@@ -7,6 +8,7 @@ class AssetTransitionsController < ApplicationController
     @asset_transition = current_user.asset_transitions.build
     @user_asset_id = UserAsset.pluck('title', 'id')
     @date = Date.today
+    @monthly_flow = return_monthly_flow(@date)
   end
   
   def create

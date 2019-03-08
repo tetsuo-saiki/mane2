@@ -8,6 +8,7 @@ class DebtsController < ApplicationController
     @sum_monthly_debts = sum_monthly_amount_of_model(@debts, "debt_withdrawal")
     @debt = current_user.debts.build
     @date = Date.today
+    @monthly_flow = return_monthly_flow(@date)
   end
   
   def create

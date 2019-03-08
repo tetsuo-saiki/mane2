@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
     @item = current_user.items.build
     @item_type_id = ItemType.pluck('item_type', 'id')
     @date = Date.today
+    @monthly_flow = return_monthly_flow(@date)
   end
 
   def create

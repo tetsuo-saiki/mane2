@@ -1,6 +1,8 @@
 <h1>AssetTransition#index</h1>
 <p>Find me in app/views/asset_transitions/index.html.erb</p>
 
+今月の収支は<%= @monthly_flow %>円です
+
 <%= form_for(@asset_transition, :url => {:action => 'create'}) do |f| %>
 
   <% if false %>

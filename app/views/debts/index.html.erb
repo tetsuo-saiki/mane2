@@ -28,10 +28,6 @@
   <div class="form-group">
     <%= f.select :withdrawal_date, 1..31, {}, {class: 'form-control'} %>
   </div>
-  <div class="form-group">
-    <%= f.label :full_payment_date, "full_payment_date" %>
-    <%= f.date_field :full_payment_date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
-  </div>
     
   <div class="form-group">
     <%= f.submit "submit", class:'btn btn-primary' %>

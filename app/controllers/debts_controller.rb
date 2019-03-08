@@ -12,6 +12,7 @@ class DebtsController < ApplicationController
   
   def create
     @debt = current_user.debts.build(debt_params)
+    @debt.full_payment_date = Debt.calc_full_payment_date(@debt)
     if @debt.save
       reflect_debt_to_monthly_flow
       flash[:notice] = '正常に保存しました。'
@@ -34,7 +35,7 @@ class DebtsController < ApplicationController
   private
   
   def debt_params
-    params.require(:debt).permit(:title, :debt_total_amount, :debt_withdrawal, :withdrawal_date, :full_payment_date)
+    params.require(:debt).permit(:title, :debt_total_amount, :debt_withdrawal, :withdrawal_date)
   end
   
   def correct_user

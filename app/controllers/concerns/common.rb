@@ -4,7 +4,7 @@ module Common
     if selected_month
       model.where("#{search_column} between ? and ?", selected_month.beginning_of_month, selected_month.end_of_month).order('created_at desc')
     else
-      model.order('created_at desc')
+      model.where("#{search_column} between ? and ?", Date.today.beginning_of_month, Date.today.end_of_month).order('created_at desc')
     end
   end
 
@@ -41,11 +41,22 @@ module Common
     end
   end
 
-  def return_monthly_flow(selected_month)
-    monthly_flow = current_user.monthly_flows.where(["year = ? and month = ?", selected_month.year, selected_month.month]).first
-    monthly_flow.income_amount_sum - monthly_flow.price_sum - monthly_flow.credit_withdrawal_sum - monthly_flow.debt_withdrawal_sum
+  def display_monthly_flow(selected_month)
+    if return_monthly_flow(selected_month)
+      "#{selected_month.year}年#{selected_month.month}月の収支は#{return_monthly_flow(selected_month)}円です"
+    else
+      "#{selected_month.year}年#{selected_month.month}月の収支はありません"
+    end
   end
 
   private
 
+  def return_monthly_flow(selected_month)
+    monthly_flow = current_user.monthly_flows.where(["year = ? and month = ?", selected_month.year, selected_month.month]).first
+    if monthly_flow
+      monthly_flow.income_amount_sum - monthly_flow.price_sum - monthly_flow.credit_withdrawal_sum - monthly_flow.debt_withdrawal_sum
+    else
+      nil
+    end
+  end
 end

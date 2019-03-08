@@ -9,6 +9,6 @@ class Debt < ApplicationRecord
 
     regist_date = Date.new(Date.today.year, Date.today.month, debt.withdrawal_date.to_i)
     
-    full_payment_date = regist_date + period_spent_in_full_payment.month
+    full_payment_date = regist_date + (period_spent_in_full_payment - 1).month
   end
 end

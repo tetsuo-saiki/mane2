@@ -64,3 +64,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 gem 'activerecord-import', require: false
+gem "simple_calendar", "~> 2.0"

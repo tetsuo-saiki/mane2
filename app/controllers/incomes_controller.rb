@@ -9,7 +9,7 @@ class IncomesController < ApplicationController
     @sum_monthly_incomes = sum_monthly_amount_of_model(@incomes, "income_amount")
     @income = current_user.incomes.build
     @date = Date.today
-    @monthly_flow = return_monthly_flow(@date)
+    @display_monthly_flow = display_monthly_flow(@date)
   end
   
   def create

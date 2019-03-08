@@ -8,14 +8,14 @@ class DebtsController < ApplicationController
     @sum_monthly_debts = sum_monthly_amount_of_model(@debts, "debt_withdrawal")
     @debt = current_user.debts.build
     @date = Date.today
-    @monthly_flow = return_monthly_flow(@date)
+    @display_monthly_flow = display_monthly_flow(@date)
   end
   
   def create
     @debt = current_user.debts.build(debt_params)
     @debt.full_payment_date = Debt.calc_full_payment_date(@debt)
     if @debt.save
-      reflect_debt_to_monthly_flow
+      reflect_debt_to_monthly_flow(@debt)
       flash[:notice] = '正常に保存しました。'
       redirect_to debts_path
     else
@@ -28,7 +28,7 @@ class DebtsController < ApplicationController
   
   def destroy
     @debt.destroy
-    reflect_debt_to_monthly_flow
+    # reflect_debt_to_monthly_flow
     flash[:notice] = '項目を削除しました。'
     redirect_to debts_path
   end
@@ -46,30 +46,44 @@ class DebtsController < ApplicationController
     end
   end
 
-  # not use bulk update (tmp)
-  def reflect_debt_to_monthly_flow
-    monthly_sum = sum_monthly_amount_of_model(current_user.debts, "debt_withdrawal")
-    monthly_flows = current_user.monthly_flows
-    if !monthly_flows.empty?
-      monthly_flows.each do |monthly_flow|
-        monthly_flow.debt_withdrawal_sum = monthly_sum
-        monthly_flow.save!
+
+  # したいこと　debt登録時、削除時に monthly_flwo テーブルに反映させたい
+  # activerecord-import を使用した bulkupdate では Mysql2::Error: Duplicate entry 'id' for key 'PRIMARY': INSERT INTO `monthly_flows` が発生し、
+  # on_duplicate_key_update を使っても解決できぬ
+  # TODO: 月計算のマスタいらないんじゃない？清宮さん
+  # def reflect_debt_to_monthly_flow(debt)
+  #   begin_date = Date.today.beginning_of_month
+  #   end_date = debt.full_payment_date.beginning_of_month
+  #   upsert_monthly_flows = []
+  #   while begin_date != end_date + 1.month
+  #     monthly_debt = current_user.debts.where("full_payment_date > ?", begin_date).where("created_at < ?", begin_date.end_of_month).sum("debt_withdrawal")
+  #     if current_user.monthly_flows.where(["year = ? and month = ?", begin_date.year, begin_date.month])[0]
+  #       exist_monthly_flow = current_user.monthly_flows.where(["year = ? and month = ?", begin_date.year, begin_date.month])[0]
+  #       exist_monthly_flow.debt_withdrawal_sum = monthly_debt
+  #       upsert_monthly_flows << exist_monthly_flow
+  #     else
+  #       upsert_monthly_flows << current_user.monthly_flows.build(debt_withdrawal_sum: monthly_debt, year: begin_date.year, month: begin_date.month)
+  #     end
+  #     begin_date += 1.month
+  #   end
+  #   MonthlyFlow.import upsert_monthly_flows, on_duplicate_key_update: [:debt_withdrawal_sum]
+  # end
+
+  # やむなく通常のupsert
+  def reflect_debt_to_monthly_flow(debt)
+    begin_date = Date.today.beginning_of_month
+    end_date = debt.full_payment_date.beginning_of_month
+    while begin_date != end_date + 1.month
+      monthly_debt = current_user.debts.where("full_payment_date > ?", begin_date).where("created_at < ?", begin_date.end_of_month).sum("debt_withdrawal")
+      if current_user.monthly_flows.where(["year = ? and month = ?", begin_date.year, begin_date.month])[0]
+        exist_monthly_flow = current_user.monthly_flows.where(["year = ? and month = ?", begin_date.year, begin_date.month])[0]
+        exist_monthly_flow.debt_withdrawal_sum = monthly_debt
+        exist_monthly_flow.save!
+      else
+        new_monthly_flow = current_user.monthly_flows.build(debt_withdrawal_sum: monthly_debt, year: begin_date.year, month: begin_date.month)
+        new_monthly_flow.save!
       end
+      begin_date += 1.month
     end
   end
-  # use bulk update
-  # def reflect_debt_to_monthly_flow
-  #   monthly_sum = sum_monthly_amount_of_model(current_user.debts, "debt_withdrawal")
-  #   monthly_flows = current_user.monthly_flows # 今は期間関係なく全取得している
-  #   if !monthly_flows.empty?
-  #     update_monthly_flows = []
-  #     monthly_flows.each do |monthly_flow|
-  #       monthly_flow.debt_withdrawal_sum = monthly_sum
-  #       update_monthly_flows << monthly_flow
-  #     end
-  #     monthly_flows.import update_monthly_flows, on_duplicate_key_update: [:debt_withdrawal_sum]
-  #   end
-  # end
 end
-    
-  

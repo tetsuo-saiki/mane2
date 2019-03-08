@@ -11,7 +11,7 @@ class AmountUsedOfCreditsController < ApplicationController
     @amount_used_of_credit = current_user.amount_used_of_credits.build
     @credit_card_id = CreditCard.pluck('title', 'id')
     @date = Date.today
-    @monthly_flow = return_monthly_flow(@date)
+    @display_monthly_flow = display_monthly_flow(@date)
   end
   
   def create

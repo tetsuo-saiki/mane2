@@ -8,7 +8,7 @@ class AssetTransitionsController < ApplicationController
     @asset_transition = current_user.asset_transitions.build
     @user_asset_id = UserAsset.pluck('title', 'id')
     @date = Date.today
-    @monthly_flow = return_monthly_flow(@date)
+    @display_monthly_flow = display_monthly_flow(@date)
   end
   
   def create

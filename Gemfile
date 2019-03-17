@@ -65,3 +65,4 @@ gem 'devise'
 
 gem 'activerecord-import', require: false
 gem "simple_calendar", "~> 2.0"
+gem 'rails-i18n'

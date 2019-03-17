@@ -33,9 +33,13 @@ $(document).on('turbolinks:load', function(){
     if(is_smart_devise){
       $(".fa-cog").text(' 設定');
       $(".fa-sign-out-alt").text(' ログアウト');
+      $(".fa-sign-in-alt").text(' ログイン');
+      $(".fa-user-plus").text(' サインアップ');
     }else{
       $(".fa-cog").text('');
       $(".fa-sign-out-alt").text('');
+      $(".fa-sign-in-alt").text('');
+      $(".fa-user-plus").text('');
     }
   }
 

@@ -21,9 +21,35 @@
 
 <% else %>
 
-  Please login
-  
-  <%= link_to 'Sign Up', new_user_registration_path, class: "" %>
-  <%= link_to 'Log In', new_user_session_path, class: "" %>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <h2>Money Management</h2>
+      </div>
+      <br>
+
+      <!-- Login Form -->
+      <form>
+        <div class="fadeIn second">
+          <p>管理から漏れがちな現金出費、移動費など<p>
+        </div>
+        <div class="fadeIn third">
+          <p>何気ない日々の出費を記録することで</p>
+        </div>
+        <div class="fadeIn fourth">
+          <p>家計を改善していこう</p>
+        </div>
+      </form>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <%= link_to "さあ、始めよう！", new_user_session_path, class: "btn btn-primary" %>
+      </div>
+
+    </div>
+  </div>
 
 <% end %>

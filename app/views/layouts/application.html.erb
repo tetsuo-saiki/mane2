@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsNew</title>
+    <title>mane2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -15,9 +16,11 @@
       <%= render "layouts/sidebar" %>
       <div id="page-content-wrapper">
         <%= render "layouts/navbar" %>
-        <% if notice %><p class="alert alert-info"><%= notice %></p><% end %>
-        <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
-      <%= yield %>
+        <div class="main-container" style="overflow-x: scroll;">
+          <% if notice %><p class="alert alert-info"><%= notice %></p><% end %>
+          <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
+          <%= yield %>
+        </div>
       </div>
     </div>
   </body>

@@ -1,28 +1,12 @@
-<h1>user_Assets#index</h1>
-<p>Find me in app/views/user_assets/index.html.erb</p>
-
-<%= form_for(@user_asset, :url => {:action => 'create'}) do |f| %>
-
-  <% if false %>
-    <ul>
-      <%= @user_asset.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
-  </div>
-    
-  <div class="form-group">
-    <%= f.submit "submit", class:'btn btn-primary' %>
-  </div>
-<% end %>
+<div class="modal-trigger">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
 
 <table class="table">
   <thead>
-    <th>id</th>
     <th>title</th>
     <th></th>
   </thead>
@@ -30,7 +14,6 @@
     <tbody>
       <% @user_assets.each do |user_asset| %>
         <tr>
-          <td><%= user_asset.id %></td>
           <td><%= user_asset.title %></td>
           <td><%= link_to "delete", user_asset, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
         </tr>
@@ -42,3 +25,38 @@
 </table>
 
 <%= link_to "back", asset_transitions_path, class: 'btn btn-default' %>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%= form_for(@user_asset, :url => {:action => 'create'}) do |f| %>
+        <div class="modal-body">
+          <% if false %>
+            <ul>
+              <%= @user_asset.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+              
+          <div class="form-group">
+            <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+          </div>
+        </div>
+          
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "submit", class:'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,39 +1,12 @@
-<h1>CreditCards#index</h1>
-<p>Find me in app/views/credit_cards/index.html.erb</p>
-
-<%= form_for(@credit_card, :url => {:action => 'create'}) do |f| %>
-
-  <% if false %>
-    <ul>
-      <%= @credit_card.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
-  </div>
-  <div class="form-group">
-    <%= f.label :use_period, "use_period" %>
-    <%= f.date_field :use_period, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.number_field :use_border, {placeholder: "use_border", class: 'form-control'} %>
-  </div>
-  <div class="form-group">
-    <%= f.label :withdrawal_date, "withdrawal_date" %>
-    <%= f.select :withdrawal_date, 1..31, {}, {class: 'form-control'} %>
-  </div>
-    
-  <div class="form-group">
-    <%= f.submit "submit", class:'btn btn-primary' %>
-  </div>
-<% end %>
+<div class="modal-trigger">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
 
 <table class="table">
   <thead>
-    <th>id</th>
     <th>title</th>
     <th>use_period</th>
     <th>use_border</th>
@@ -44,7 +17,6 @@
     <tbody>
       <% @credit_cards.each do |credit_card| %>
         <tr>
-          <td><%= credit_card.id %></td>
           <td><%= credit_card.title %></td>
           <td><%= credit_card.use_period %></td>
           <td><%= credit_card.use_border %></td>
@@ -59,3 +31,49 @@
 </table>
 
 <%= link_to 'back', amount_used_of_credits_path, class: "" %>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%= form_for(@credit_card, :url => {:action => 'create'}) do |f| %>
+        <div class="modal-body">
+          <% if false %>
+            <ul>
+              <%= @credit_card.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+              
+          <div class="form-group">
+            <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+          </div>
+          <div class="form-group">
+            <%= f.label :use_period, "use_period" %>
+            <%= f.date_field :use_period, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.number_field :use_border, {placeholder: "use_border", class: 'form-control'} %>
+          </div>
+          <div class="form-group">
+            <%= f.label :withdrawal_date, "withdrawal_date" %>
+            <%= f.select :withdrawal_date, 1..31, {}, {class: 'form-control'} %>
+          </div>
+        </div>
+              
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "submit", class:'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -2,13 +2,14 @@ class HomeController < ApplicationController
   include Common
 
   def index
-    @selected_month = params[:start_date] ? Date.parse(params[:start_date]) : Date.today
-    @display_monthly_flow = display_monthly_flow(@selected_month)
-    @incomes = return_daily_flow_of_incomes(@selected_month)
-    @items = return_daily_flow_of_items(@selected_month)
-    @credits = return_daily_flow_of_credits(@selected_month)
-    @debts = return_daily_flow_of_debts(@selected_month)
-
+    if user_signed_in?
+      @selected_month = params[:start_date] ? Date.parse(params[:start_date]) : Date.today
+      @display_monthly_flow = display_monthly_flow(@selected_month)
+      @incomes = return_daily_flow_of_incomes(@selected_month)
+      @items = return_daily_flow_of_items(@selected_month)
+      @credits = return_daily_flow_of_credits(@selected_month)
+      @debts = return_daily_flow_of_debts(@selected_month)
+    end
   end
 
   private

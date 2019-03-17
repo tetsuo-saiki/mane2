@@ -1,4 +1,5 @@
 class CreditCardsController < ApplicationController
+  include Common
   before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
   
@@ -6,6 +7,7 @@ class CreditCardsController < ApplicationController
     @credit_cards = current_user.credit_cards.order('created_at desc')
     @credit_card = current_user.credit_cards.build
     @date = Date.today
+    @display_monthly_flow = display_monthly_flow(@date)
   end
   
   def create

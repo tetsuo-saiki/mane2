@@ -1,10 +1,13 @@
 class UserAssetsController < ApplicationController
+  include Common
   before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
   
   def index
     @user_assets = current_user.user_assets.order('created_at desc')
     @user_asset = current_user.user_assets.build
+    @date = Date.today
+    @display_monthly_flow = display_monthly_flow(@date)
   end
   
   def create

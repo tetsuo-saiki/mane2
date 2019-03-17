@@ -17,3 +17,16 @@
 .day_flow_of_debt {
   font-weight: bold;
 }
+
+.simple-calendar {
+  th {
+    min-width: 60px;
+    font-size: 12px;
+  }
+  td {
+    font-size: 12px;
+    .day_flow_of_income, .day_flow_of_item, .day_flow_of_credit, .day_flow_of_debt{
+      font-size: 10px;
+    }
+  }
+}

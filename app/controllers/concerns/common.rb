@@ -2,9 +2,9 @@ module Common
   # 選択月のモデル取得 selected_month = "2019-03-01" (Date型)
   def search(model, selected_month, search_column)
     if selected_month
-      model.where("#{search_column} between ? and ?", selected_month.beginning_of_month, selected_month.end_of_month).order('created_at desc')
+      model.where("#{search_column} between ? and ?", selected_month.beginning_of_month, selected_month.end_of_month)
     else
-      model.where("#{search_column} between ? and ?", Date.today.beginning_of_month, Date.today.end_of_month).order('created_at desc')
+      model.where("#{search_column} between ? and ?", Date.today.beginning_of_month, Date.today.end_of_month)
     end
   end
 
@@ -43,9 +43,9 @@ module Common
 
   def display_monthly_flow(selected_month)
     if return_monthly_flow(selected_month)
-      "#{selected_month.year}年#{selected_month.month}月の収支は#{return_monthly_flow(selected_month)}円です"
+      "#{selected_month.year}年#{selected_month.month}月の収支:#{return_monthly_flow(selected_month)}円"
     else
-      "#{selected_month.year}年#{selected_month.month}月の収支はありません"
+      "#{selected_month.year}年#{selected_month.month}月の収支:記録はありません"
     end
   end
 

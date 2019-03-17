@@ -1,15 +1,7 @@
 <% if user_signed_in? %>
-  <%= @display_monthly_flow %>
-  
-  <h1>Home#index</h1>
-  <p>Find me in app/views/home/index.html.erb</p>
-  
-  <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "" %>
-  <%= link_to 'Items', items_path, class: "" %>
-  <%= link_to 'Assets', asset_transitions_path, class: "" %>
-  <%= link_to 'Incomes', incomes_path, class: "" %>
-  <%= link_to 'Debts', debts_path, class: "" %>
-  <%= link_to 'CreditCards', amount_used_of_credits_path, class: "" %>
+  <div class="display-monthly-flow">
+    <%= @display_monthly_flow %>
+  </div>
   
   <%= month_calendar do |date| %>
     <%= date.strftime("%d") %>

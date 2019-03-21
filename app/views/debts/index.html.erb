@@ -1,6 +1,10 @@
-<% if @sum_monthly_debts %>
-  毎月の返済額 ： <%= @sum_monthly_debts %>
-<% end %>
+<h3 class="section-title">負債</h3>
+
+<div class="each-monthly-flow">
+  <% if @sum_monthly_debts %>
+    毎月の返済額 ： <%= @sum_monthly_debts %>
+  <% end %>
+</div>
 
 <div class="modal-trigger">
   <!-- Button trigger modal -->
@@ -11,11 +15,11 @@
 
 <table class="table">
   <thead>
-    <th>title</th>
-    <th>debt_total_amount</th>
-    <th>debt_withdrawal</th>
-    <th>withdrawal_date</th>
-    <th>full_payment_date</th>
+    <th>負債名</th>
+    <th>負債総額</th>
+    <th>毎月の返済額</th>
+    <th>毎月の返済日</th>
+    <th>完済日</th>
     <th></th>
   </thead>
   <% if @debts %>
@@ -27,7 +31,7 @@
           <td><%= debt.debt_withdrawal %></td>
           <td><%= debt.withdrawal_date %></td>
           <td><%= debt.full_payment_date %></td>
-          <td><%= link_to "delete", debt, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+          <td><%= link_to debt, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
         </tr>
       <% end %>
     </tbody>
@@ -41,7 +45,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">負債登録</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -58,22 +62,23 @@
           <% end %>
               
           <div class="form-group">
-            <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+            <%= f.text_field :title, {placeholder: "負債名", class: 'form-control'} %>
           </div>
           <div class="form-group">
-            <%= f.number_field :debt_total_amount, {placeholder: "debt_total_amount", class: 'form-control'} %>
+            <%= f.number_field :debt_total_amount, {placeholder: "負債総額", class: 'form-control'} %>
           </div>
           <div class="form-group">
-            <%= f.number_field :debt_withdrawal, {placeholder: "debt_withdrawal", class: 'form-control'} %>
+            <%= f.number_field :debt_withdrawal, {placeholder: "毎月の返済額", class: 'form-control'} %>
           </div>
           <div class="form-group">
+            <%= f.label :withdrawal_date, "毎月の返済日" %>
             <%= f.select :withdrawal_date, 1..31, {}, {class: 'form-control'} %>
           </div>
         </div>
           
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit "submit", class:'btn btn-primary' %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+          <%= f.submit "登録", class:'btn btn-primary' %>
         </div>
       <% end %>
     </div>

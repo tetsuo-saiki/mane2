@@ -1,3 +1,5 @@
+<h3 class="section-title">カード登録</h3>
+
 <div class="modal-trigger">
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
@@ -7,10 +9,10 @@
 
 <table class="table">
   <thead>
-    <th>title</th>
-    <th>use_period</th>
-    <th>use_border</th>
-    <th>withdrawal_date</th>
+    <th>カード名</th>
+    <th>有効期限</th>
+    <th>利用可能枠</th>
+    <th>引落日</th>
     <th></th>
   </thead>
   <% if @credit_cards %>
@@ -21,7 +23,7 @@
           <td><%= credit_card.use_period %></td>
           <td><%= credit_card.use_border %></td>
           <td><%= credit_card.withdrawal_date %></td>
-          <td><%= link_to "delete", credit_card, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+          <td><%= link_to credit_card, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
         </tr>
       <% end %>
     </tbody>
@@ -30,14 +32,14 @@
   <% end %>
 </table>
 
-<%= link_to 'back', amount_used_of_credits_path, class: "" %>
+<%= link_to '引き落とし情報登録', amount_used_of_credits_path, class: "" %>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">カードを登録</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -54,24 +56,24 @@
           <% end %>
               
           <div class="form-group">
-            <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+            <%= f.text_field :title, {placeholder: "カード名", class: 'form-control'} %>
           </div>
           <div class="form-group">
-            <%= f.label :use_period, "use_period" %>
+            <%= f.label :use_period, "有効期限" %>
             <%= f.date_field :use_period, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
           </div>
           <div class="form-group">
-            <%= f.number_field :use_border, {placeholder: "use_border", class: 'form-control'} %>
+            <%= f.number_field :use_border, {placeholder: "利用枠", class: 'form-control'} %>
           </div>
           <div class="form-group">
-            <%= f.label :withdrawal_date, "withdrawal_date" %>
+            <%= f.label :withdrawal_date, "引落日" %>
             <%= f.select :withdrawal_date, 1..31, {}, {class: 'form-control'} %>
           </div>
         </div>
               
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit "submit", class:'btn btn-primary' %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+          <%= f.submit "登録", class:'btn btn-primary' %>
         </div>
       <% end %>
     </div>

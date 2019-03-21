@@ -34,7 +34,7 @@ $(document).on('turbolinks:load', function(){
       $(".fa-cog").text(' 設定');
       $(".fa-sign-out-alt").text(' ログアウト');
       $(".fa-sign-in-alt").text(' ログイン');
-      $(".fa-user-plus").text(' サインアップ');
+      $(".fa-user-plus").text(' 登録');
     }else{
       $(".fa-cog").text('');
       $(".fa-sign-out-alt").text('');

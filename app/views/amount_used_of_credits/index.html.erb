@@ -1,9 +1,4 @@
-<% if @sum_monthly_amount_used_of_credits %>
-  引き落とし合計 ： <%= @sum_monthly_amount_used_of_credits %>
-  <% if @selected_month %>
-    (<%= @selected_month.year %>年<%= @selected_month.month %>月)
-  <% end %>
-<% end %>
+<h3 class="section-title">カード</h3>
 
 <%= form_tag('/amount_used_of_credits', :method => :get) do %>
   <div class="form-group">
@@ -15,6 +10,15 @@
   </div>
 <% end %>
 
+<div class="each-monthly-flow">
+  <% if @sum_monthly_amount_used_of_credits %>
+    引き落とし合計 ： <%= @sum_monthly_amount_used_of_credits %>
+    <% if @selected_month %>
+      (<%= @selected_month.year %>年<%= @selected_month.month %>月)
+    <% end %>
+  <% end %>
+</div>
+
 <div class="modal-trigger">
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
@@ -24,10 +28,10 @@
 
 <table class="table">
   <thead>
-    <th>using_border</th>
-    <th>credit_withdrawal</th>
-    <th>credit_card</th>
-    <th>withdrawal_date</th>
+    <th>利用残高</th>
+    <th>引き落とし額</th>
+    <th>カード</th>
+    <th>引き落とし日</th>
     <th></th>
   </thead>
   <% if @amount_used_of_credits %>
@@ -38,7 +42,7 @@
           <td><%= amount_used_of_credit.credit_withdrawal %></td>
           <td><%= amount_used_of_credit.credit_card.title %></td>
           <td><%= amount_used_of_credit.withdrawal_date.strftime("%Y-%m-%d") if amount_used_of_credit.withdrawal_date %></td>
-          <td><%= link_to "delete", amount_used_of_credit, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+          <td><%= link_to amount_used_of_credit, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
         </tr>
       <% end %>
     </tbody>
@@ -47,14 +51,14 @@
   <% end %>
 </table>
 
-<%= link_to 'CreditCard', credit_cards_path, class: "btn btn-default" %>
+<%= link_to 'カード登録', credit_cards_path, class: "btn btn-default" %>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">引き落とし情報を登録</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -71,22 +75,24 @@
           <% end %>
               
           <div class="form-group">
-            <%= f.number_field :using_border, {placeholder: "using_border", class: 'form-control'} %>
+            <%= f.number_field :using_border, {placeholder: "利用残高", class: 'form-control'} %>
           </div>
           <div class="form-group">
-            <%= f.number_field :credit_withdrawal, {placeholder: "credit_withdrawal", class: 'form-control'} %>
+            <%= f.number_field :credit_withdrawal, {placeholder: "引き落とし額", class: 'form-control'} %>
           </div>
           <div class="form-group">
+            <%= f.label :credit_card_id, "カードを選択" %>
             <%= f.select :credit_card_id, @credit_card_id, {}, {class: 'form-control'} %>
           </div>
           <div class="form-group">
+            <%= f.label :withdrawal_date, "引き落とし日" %>
             <%= f.date_field :withdrawal_date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
           </div>
         </div>
               
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit "submit", class:'btn btn-primary' %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+          <%= f.submit "登録", class:'btn btn-primary' %>
         </div>
       <% end %>
 

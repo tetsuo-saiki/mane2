@@ -1,9 +1,13 @@
-<% if @sum_monthly_items %>
-  支出合計 ： <%= @sum_monthly_items %>
-  <% if @selected_month %>
-    (<%= @selected_month.year %>年<%= @selected_month.month %>月)
+<h3 class="section-title">支出</h3>
+
+<div class="each-monthly-flow">
+  <% if @sum_monthly_items %>
+    支出合計 ： <%= @sum_monthly_items %>
+    <% if @selected_month %>
+      (<%= @selected_month.year %>年<%= @selected_month.month %>月)
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 <%= form_tag('/items', :method => :get) do %>
   <div class="form-group">
@@ -24,9 +28,9 @@
 
 <table class="table">
   <thead>
-    <th>title</th>
-    <th>price</th>
-    <th>date</th>
+    <th>支出名</th>
+    <th>金額</th>
+    <th>日付</th>
   </thead>
   <% if @items %>
     <tbody>
@@ -48,7 +52,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">支出を登録</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -66,23 +70,25 @@
           <% end %>
               
           <div class="form-group">
-            <%= f.text_field :title, {placeholder: "title", class: 'form-control'} %>
+            <%= f.text_field :title, {placeholder: "支出名", class: 'form-control'} %>
           </div>
           <div class="form-group">
+            <%= f.label :item_type_id, "カテゴリ" %>
             <%= f.select :item_type_id, @item_type_id, {}, {class: 'form-control'} %>
           </div>
           <div class="form-group">
-            <%= f.number_field :price, {placeholder: "price", class: 'form-control'} %>
+            <%= f.number_field :price, {placeholder: "金額", class: 'form-control'} %>
           </div>
           <div class="form-group">
+            <%= f.label :date, "日付" %>
             <%= f.date_field :date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
           </div>
               
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit "submit", class:'btn btn-primary' %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+          <%= f.submit "登録", class:'btn btn-primary' %>
         </div>
       <% end %>
     </div>

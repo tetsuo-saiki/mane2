@@ -27,5 +27,5 @@
   <% end %>
 </table>
 
-<%= link_to "delete", @item, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %>
-<%= link_to "back", items_path, class: 'btn btn-default' %>
+<%= link_to @item, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %>
+<%= link_to "一覧", items_path, class: 'btn btn-default' %>

@@ -1,3 +1,5 @@
+<h3 class="section-title">資産</h3>
+
 <div class="modal-trigger">
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
@@ -7,9 +9,9 @@
 
 <table class="table">
   <thead>
-    <th>asset_amount</th>
-    <th>user_asset</th>
-    <th>date</th>
+    <th>資産額</th>
+    <th>資産名</th>
+    <th>確認日</th>
     <th></th>
   </thead>
   <% if @asset_transitions %>
@@ -19,7 +21,7 @@
           <td><%= asset_transition.asset_amount %></td>
           <td><%= asset_transition.user_asset.title %></td>
           <td><%= asset_transition.date.strftime("%Y-%m-%d") if asset_transition.date %></td>
-          <td><%= link_to "delete", asset_transition, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger' %></td>
+          <td><%= link_to asset_transition, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
         </tr>
       <% end %>
     </tbody>
@@ -28,14 +30,14 @@
   <% end %>
 </table>
 
-<%= link_to 'UserAsset', user_assets_path, class: "btn btn-default" %>
+<%= link_to '資産リスト', user_assets_path, class: "btn btn-default" %>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">資産額登録</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -52,13 +54,15 @@
           <% end %>
               
           <div class="form-group">
-            <%= f.number_field :asset_amount, {placeholder: "asset_amount", class: 'form-control'} %>
+            <%= f.number_field :asset_amount, {placeholder: "資産額", class: 'form-control'} %>
           </div>
           <div class="form-group">
-            <%= f.date_field :date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
-          </div>
-          <div class="form-group">
+            <%= f.label :user_asset_id, "資産名" %>
             <%= f.select :user_asset_id, @user_asset_id, {}, {class: 'form-control'} %>
+          </div>
+          <div class="form-group">
+            <%= f.label :date, "確認日" %>
+            <%= f.date_field :date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
           </div>
         </div>
             

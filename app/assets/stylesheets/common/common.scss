@@ -43,3 +43,7 @@ div.list-group-item {
     color: rgb(90, 90, 90);
     text-align: center;
 }
+
+.prev form, .next form {
+    display: none;
+}

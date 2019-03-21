@@ -1,21 +1,36 @@
 <h3 class="section-title">カード</h3>
 
-<%= form_tag('/amount_used_of_credits', :method => :get) do %>
-  <div class="form-group">
-    <%= date_select :select_month, {}, class: 'form-control', discard_day: true %>
-  </div>
-  
-  <div class="form-group">
-    <%= submit_tag "search", class:'btn btn-primary' %>
-  </div>
-<% end %>
-
-<div class="each-monthly-flow">
-  <% if @sum_monthly_amount_used_of_credits %>
-    引き落とし合計 ： <%= @sum_monthly_amount_used_of_credits %>
-    <% if @selected_month %>
-      (<%= @selected_month.year %>年<%= @selected_month.month %>月)
-    <% end %>
+<div class="each-monthly-flow row">
+  <% if @selected_month %>
+    <div class="prev">
+      <button type="submit" class="btn btn-link prev-month"><i class="fas fa-chevron-circle-left"></i></button>
+      <%= form_tag('/amount_used_of_credits', :method => :get) do %>
+        <%= date_select :select_month, {}, default: @selected_month.prev_month, discard_day: true %>
+      <% end %>
+    </div>
+    引落合計 ： <%= @sum_monthly_amount_used_of_credits %>
+    (<%= @selected_month.year %>年<%= @selected_month.month %>月)
+    <div class="next">
+      <button type="submit" class="btn btn-link next-month"><i class="fas fa-chevron-circle-right"></i></button>
+      <%= form_tag('/amount_used_of_credits', :method => :get) do %>
+        <%= date_select :select_month, {}, default: @selected_month.next_month, discard_day: true %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="prev">
+      <button type="submit" class="btn btn-link prev-month"><i class="fas fa-chevron-circle-left"></i></button>
+      <%= form_tag('/amount_used_of_credits', :method => :get) do %>
+        <%= date_select :select_month, {}, default: @date.prev_month, discard_day: true %>
+      <% end %>
+    </div>
+    引落合計 ： <%= @sum_monthly_amount_used_of_credits %>
+    (<%= @date.year %>年<%= @date.month %>月)
+    <div class="next">
+      <button type="submit" class="btn btn-link next-month"><i class="fas fa-chevron-circle-right"></i></button>
+      <%= form_tag('/amount_used_of_credits', :method => :get) do %>
+        <%= date_select :select_month, {}, default: @date.next_month, discard_day: true %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 

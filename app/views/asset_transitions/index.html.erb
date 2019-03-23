@@ -2,35 +2,35 @@
 
 <div class="modal-trigger">
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#Modal">
     <i class="fas fa-plus"></i>
   </button>
 </div>
 
-<table class="table">
-  <thead>
-    <th>資産額</th>
-    <th>資産名</th>
-    <th>確認日</th>
-    <th></th>
-  </thead>
+<div class="main-wrapper">
   <% if @asset_transitions %>
-    <tbody>
-      <% @asset_transitions.each do |asset_transition| %>
-        <tr>
-          <td><%= asset_transition.asset_amount %></td>
-          <td><%= asset_transition.user_asset.title %></td>
-          <td><%= asset_transition.date.strftime("%Y-%m-%d") if asset_transition.date %></td>
-          <td><%= link_to asset_transition, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <% @asset_transitions.each do |asset_transition| %>
+      <div class="card-wrapper">
+        <div class="card"  style="width: 18rem;">
+          <div class="card-header">
+            資産名：<%= asset_transition.user_asset.title %>
+            <%= link_to asset_transition, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %>
+          </div>
+          <div class="card-body">
+            <ul style="list-style:none; margin-bottom:0;">
+              <li>資産額：<%= asset_transition.asset_amount %></li>
+              <li>確認日：<%= asset_transition.date.strftime("%Y-%m-%d") if asset_transition.date %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% else %>
     There is no asset_transitions.
   <% end %>
-</table>
+</div>
 
-<%= link_to '資産リスト', user_assets_path, class: "btn btn-default" %>
+<%= link_to '資産リスト', user_assets_path, class: "btn btn-light" %>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

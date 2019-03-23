@@ -8,37 +8,35 @@
 
 <div class="modal-trigger">
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#Modal">
     <i class="fas fa-plus"></i>
   </button>
 </div>
 
-<table class="table">
-  <thead>
-    <th>負債名</th>
-    <th>負債総額</th>
-    <th>毎月の返済額</th>
-    <th>毎月の返済日</th>
-    <th>完済日</th>
-    <th></th>
-  </thead>
+<div class="main-wrapper">
   <% if @debts %>
-    <tbody>
-      <% @debts.each do |debt| %>
-        <tr>
-          <td><%= debt.title %></td>
-          <td><%= debt.debt_total_amount %></td>
-          <td><%= debt.debt_withdrawal %></td>
-          <td><%= debt.withdrawal_date %></td>
-          <td><%= debt.full_payment_date %></td>
-          <td><%= link_to debt, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <% @debts.each do |debt| %>
+      <div class="card-wrapper">
+        <div class="card"  style="width: 18rem;">
+          <div class="card-header">
+            負債名：<%= debt.title %>
+            <%= link_to debt, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %>
+          </div>
+          <div class="card-body">
+            <ul style="list-style:none; margin-bottom:0;">
+              <li>負債総額：<%= debt.debt_total_amount %></li>
+              <li>毎月の返済額：<%= debt.debt_withdrawal %></li>
+              <li>毎月の返済日：<%= debt.withdrawal_date %></li>
+              <li>完済日：<%= debt.full_payment_date %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% else %>
     There is no debts.
   <% end %>
-</table>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

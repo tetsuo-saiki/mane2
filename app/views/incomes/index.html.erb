@@ -36,33 +36,33 @@
 
 <div class="modal-trigger">
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#Modal">
     <i class="fas fa-plus"></i>
   </button>
 </div>
 
-<table class="table">
-  <thead>
-    <th>収入名</th>
-    <th>収入額</th>
-    <th>日付</th>
-    <th></th>
-  </thead>
+<div class="main-wrapper">
   <% if @incomes %>
-    <tbody>
-      <% @incomes.each do |income| %>
-        <tr>
-          <td><%= income.title %></td>
-          <td><%= income.income_amount %></td>
-          <td><%= income.income_date %></td>
-          <td><%= link_to income, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <% @incomes.each do |income| %>
+      <div class="card-wrapper">
+        <div class="card"  style="width: 18rem;">
+          <div class="card-header">
+            収入名：<%= income.title %>
+            <%= link_to income, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %>
+          </div>
+          <div class="card-body">
+            <ul style="list-style:none; margin-bottom:0;">
+              <li>収入額：<%= income.income_amount %></li>
+              <li>日付：<%= income.income_date %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% else %>
     There is no incomes.
   <% end %>
-</table>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

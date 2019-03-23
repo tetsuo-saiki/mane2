@@ -2,37 +2,36 @@
 
 <div class="modal-trigger">
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#Modal">
     <i class="fas fa-plus"></i>
   </button>
 </div>
 
-<table class="table">
-  <thead>
-    <th>カード名</th>
-    <th>有効期限</th>
-    <th>利用可能枠</th>
-    <th>引落日</th>
-    <th></th>
-  </thead>
+<div class="main-wrapper">
   <% if @credit_cards %>
-    <tbody>
-      <% @credit_cards.each do |credit_card| %>
-        <tr>
-          <td><%= credit_card.title %></td>
-          <td><%= credit_card.use_period %></td>
-          <td><%= credit_card.use_border %></td>
-          <td><%= credit_card.withdrawal_date %></td>
-          <td><%= link_to credit_card, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <% @credit_cards.each do |credit_card| %>
+      <div class="card-wrapper">
+        <div class="card"  style="width: 18rem;">
+          <div class="card-header">
+            カード名：<%= credit_card.title %>
+            <%= link_to credit_card, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %>
+          </div>
+          <div class="card-body">
+            <ul style="list-style:none; margin-bottom:0;">
+              <li>有効期限：<%= credit_card.use_period.strftime("%Y-%m") %></li>
+              <li>利用可能枠：<%= credit_card.use_border %></li>
+              <li>引き落とし日：<%= credit_card.withdrawal_date %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% else %>
     There is no credit_cards.
   <% end %>
-</table>
+</div>
 
-<%= link_to '引き落とし情報登録', amount_used_of_credits_path, class: "" %>
+<%= link_to '引き落とし情報登録', amount_used_of_credits_path, class: "btn btn-light" %>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,7 +59,7 @@
           </div>
           <div class="form-group">
             <%= f.label :use_period, "有効期限" %>
-            <%= f.date_field :use_period, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
+            <%= f.date_select :use_period, {default: @date, discard_day: true}, class: 'form-control' %>
           </div>
           <div class="form-group">
             <%= f.number_field :use_border, {placeholder: "利用枠", class: 'form-control'} %>

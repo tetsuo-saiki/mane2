@@ -16,7 +16,7 @@
       <%= render "layouts/sidebar" %>
       <div id="page-content-wrapper">
         <%= render "layouts/navbar" %>
-        <div class="main-container" style="overflow-x: scroll;">
+        <div class="main-container">
           <% if notice %><p class="alert alert-info"><%= notice %></p><% end %>
           <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
           <%= yield %>

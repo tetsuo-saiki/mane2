@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.calendar-heading {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
 .day_flow_of_income {
   color: blue;
   font-weight: bold;
@@ -19,6 +28,7 @@
 }
 
 .simple-calendar {
+  overflow-x: scroll;
   th {
     min-width: 60px;
     font-size: 12px;
@@ -36,6 +46,7 @@
 /* STRUCTURE */
 
 .wrapper {
+
   display: flex;
   align-items: center;
   flex-direction: column; 
@@ -62,12 +73,16 @@
 }
 
 #formFooter {
-  background-color: #f6f6f6;
+  background-color: rgb(98, 120, 126);
   border-top: 1px solid #dce8f1;
   padding: 25px;
   text-align: center;
   -webkit-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
+  a {
+    // font-weight: bold;
+    color: #fff !important;
+  }
 }
 
 
@@ -132,6 +147,7 @@
 }
 
 .fadeIn.first {
+  margin-top: 20px;
   -webkit-animation-delay: 0.4s;
   -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;

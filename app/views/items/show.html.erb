@@ -1,10 +1,6 @@
 <table class="table">
   <% if @item %>
-    <tbody>
-      <tr>
-        <th>id</th>
-        <td><%= @item.id %></td>
-      </tr>
+    <thead class="thead-light">
       <tr>
         <th>title</th>
         <td><%= @item.title %></td>
@@ -21,11 +17,11 @@
         <th>date</th>
         <td><%= @item.date %></td>
       </tr>
-    </tbody>
+    </thead>
   <% else %>
     There is no items.
   <% end %>
 </table>
 
-<%= link_to @item, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %>
-<%= link_to "一覧", items_path, class: 'btn btn-default' %>
+<%= link_to @item, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %>
+<%= link_to "一覧", items_path, class: 'btn btn-light' %>

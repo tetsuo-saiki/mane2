@@ -36,37 +36,36 @@
 
 <div class="modal-trigger">
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#Modal">
     <i class="fas fa-plus"></i>
   </button>
 </div>
 
-<table class="table">
-  <thead>
-    <th>利用残高</th>
-    <th>引き落とし額</th>
-    <th>カード</th>
-    <th>引き落とし日</th>
-    <th></th>
-  </thead>
+<div class="main-wrapper">
   <% if @amount_used_of_credits %>
-    <tbody>
-      <% @amount_used_of_credits.each do |amount_used_of_credit| %>
-        <tr>
-          <td><%= amount_used_of_credit.using_border %></td>
-          <td><%= amount_used_of_credit.credit_withdrawal %></td>
-          <td><%= amount_used_of_credit.credit_card.title %></td>
-          <td><%= amount_used_of_credit.withdrawal_date.strftime("%Y-%m-%d") if amount_used_of_credit.withdrawal_date %></td>
-          <td><%= link_to amount_used_of_credit, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="far fa-times-circle"></i><% end %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <% @amount_used_of_credits.each do |amount_used_of_credit| %>
+      <div class="card-wrapper">
+        <div class="card"  style="width: 18rem;">
+          <div class="card-header">
+            カード：<%= amount_used_of_credit.credit_card.title %>
+            <%= link_to amount_used_of_credit, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %>
+          </div>
+          <div class="card-body">
+            <ul style="list-style:none; margin-bottom:0;">
+              <li>利用残高：<%= amount_used_of_credit.using_border %></li>
+              <li>引き落とし額：<%= amount_used_of_credit.credit_withdrawal %></li>
+              <li>引き落とし日：<%= amount_used_of_credit.withdrawal_date.strftime("%Y-%m-%d") if amount_used_of_credit.withdrawal_date %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% else %>
     There is no amount_used_of_credits.
   <% end %>
-</table>
+</div>
 
-<%= link_to 'カード登録', credit_cards_path, class: "btn btn-default" %>
+<%= link_to 'カード登録', credit_cards_path, class: "btn btn-light" %>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

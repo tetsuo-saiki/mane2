@@ -3,8 +3,23 @@ body {
     overflow-x: hidden;
 }
 
+a, i {
+    color:rgb(100, 98, 98) !important;
+}
+
 .main-container {
     margin: 10px;
+}
+
+.main-wrapper {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 @mixin flow {
@@ -27,7 +42,8 @@ body {
 }
 
 div.list-group-item {
-    background-color: rgb(169, 235, 255);
+    background-color: rgb(109, 109, 109);
+    color: #fff;
 }
 
 .sidebar-heading a{
@@ -39,11 +55,16 @@ div.list-group-item {
 }
 
 .section-title {
-    background-color: rgb(232, 244, 255);
+    // background-color: rgb(232, 244, 255);
     color: rgb(90, 90, 90);
     text-align: center;
 }
 
 .prev form, .next form {
     display: none;
+}
+
+#menu-toggle {
+//    background-color: rgb(173, 173, 173) !important;
+//    border-color: rgb(173, 173, 173) !important;
 }

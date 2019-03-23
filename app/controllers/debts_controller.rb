@@ -4,7 +4,8 @@ class DebtsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
-    @debts = current_user.debts.order('created_at desc')
+    @selected_month = get_selected_month(params[:select_month])
+    @debts = debt_search(@selected_month)
     @sum_monthly_debts = sum_monthly_amount_of_model(@debts, "debt_withdrawal")
     @debt = current_user.debts.build
     @date = Date.today
@@ -46,6 +47,13 @@ class DebtsController < ApplicationController
     end
   end
 
+  def debt_search(selected_month)
+    if selected_month
+      current_user.debts.where("created_at < ?", selected_month.end_of_month).where("full_payment_date > ?", selected_month.beginning_of_month)
+    else
+      current_user.debts.where("created_at < ?", Date.today.end_of_month).where("full_payment_date > ?", Date.today.beginning_of_month)
+    end
+  end
 
   # したいこと　debt登録時、削除時に monthly_flwo テーブルに反映させたい
   # activerecord-import を使用した bulkupdate では Mysql2::Error: Duplicate entry 'id' for key 'PRIMARY': INSERT INTO `monthly_flows` が発生し、

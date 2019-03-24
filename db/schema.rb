@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_063336) do
+ActiveRecord::Schema.define(version: 2019_03_24_074517) do
 
   create_table "amount_used_of_credits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "using_border", null: false
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_063336) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "use_credit", default: false, null: false
     t.index ["item_type_id"], name: "index_items_on_item_type_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end

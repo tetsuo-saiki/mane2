@@ -31,12 +31,12 @@ $(document).on('turbolinks:load', function(){
   function dropdown_icon_change() {
     var is_smart_devise = $(window).width() <= 991;
     if(is_smart_devise){
-      $(".fa-cog").text(' 設定');
+      $(".fa-file-pdf").text(' PDF');
       $(".fa-sign-out-alt").text(' ログアウト');
       $(".fa-sign-in-alt").text(' ログイン');
       $(".fa-user-plus").text(' 登録');
     }else{
-      $(".fa-cog").text('');
+      $(".fa-file-pdf").text('');
       $(".fa-sign-out-alt").text('');
       $(".fa-sign-in-alt").text('');
       $(".fa-user-plus").text('');

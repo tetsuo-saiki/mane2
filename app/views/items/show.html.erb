@@ -2,20 +2,24 @@
   <% if @item %>
     <thead class="thead-light">
       <tr>
-        <th>title</th>
+        <th>支出名</th>
         <td><%= @item.title %></td>
       </tr>
       <tr>
-        <th>price</th>
+        <th>金額</th>
         <td><%= @item.price %></td>
       </tr>
       <tr>
-        <th>image</th>
+        <th>画像</th>
         <td><% if @item.image_url %><%= @item.image_url %><% end %></td>
       </tr>
       <tr>
-        <th>date</th>
+        <th>日付</th>
         <td><%= @item.date %></td>
+      </tr>
+      <tr>
+        <th>カード使用</th>
+        <td><%= @item.use_credit %></td>
       </tr>
     </thead>
   <% else %>

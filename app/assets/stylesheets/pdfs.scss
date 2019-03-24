@@ -1,3 +1,28 @@
 // Place all the styles related to the pdfs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.mini-form-container {
+    border: solid 1px;
+    border-radius: 5px;
+    border-color: rgb(173, 173, 173);
+    margin-bottom: 15px;
+}
+
+.mini-form {
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+}
+.mini-form-submit {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center; /* 縦方向中央揃え（Safari用） */
+    align-items: center; /* 縦方向中央揃え */
+    -webkit-justify-content: center; /* 横方向中央揃え（Safari用） */
+    justify-content: center; /* 横方向中央揃え */
+    height: 70px;
+}
+.mini-form-checkbox {
+    padding-left: 30px;
+}

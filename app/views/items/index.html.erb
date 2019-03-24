@@ -100,7 +100,10 @@
             <%= f.label :date, "日付" %>
             <%= f.date_field :date, value: @date.strftime("%Y-%m-%d"), class: 'form-control' %>
           </div>
-              
+          <div class="form-group">
+            <%= f.check_box :use_credit, checked_value: "1", unchecked_value: "0" %>
+            <%= f.label :use_credit, "カード払い" %>
+          </div>
         </div>
 
         <div class="modal-footer">

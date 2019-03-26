@@ -28,8 +28,8 @@ class DebtsController < ApplicationController
   end
   
   def destroy
+    reflect_debt_destroy_to_monthly_flow(@debt)
     @debt.destroy
-    # reflect_debt_to_monthly_flow
     flash[:notice] = '項目を削除しました。'
     redirect_to debts_path
   end
@@ -91,6 +91,17 @@ class DebtsController < ApplicationController
         new_monthly_flow = current_user.monthly_flows.build(debt_withdrawal_sum: monthly_debt, year: begin_date.year, month: begin_date.month)
         new_monthly_flow.save!
       end
+      begin_date += 1.month
+    end
+  end
+
+  def reflect_debt_destroy_to_monthly_flow(debt)
+    begin_date = Date.today.beginning_of_month
+    end_date = debt.full_payment_date.beginning_of_month
+    while begin_date != end_date + 1.month
+      exist_monthly_flow = current_user.monthly_flows.where(["year = ? and month = ?", begin_date.year, begin_date.month])[0]
+      exist_monthly_flow.debt_withdrawal_sum -= debt.debt_withdrawal
+      exist_monthly_flow.save!
       begin_date += 1.month
     end
   end

@@ -6,7 +6,7 @@ class AssetTransitionsController < ApplicationController
   def index
     @asset_transitions = current_user.asset_transitions.order('created_at desc')
     @asset_transition = current_user.asset_transitions.build
-    @user_asset_id = UserAsset.pluck('title', 'id')
+    @user_asset_id = current_user.user_assets.pluck('title', 'id')
     @date = Date.today
     @display_monthly_flow = display_monthly_flow(@date)
   end

@@ -22,29 +22,29 @@
 
 
 <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-light"> 
     <tr><th>収入</th><td><%= @incomes if @incomes %></td></tr>
-    <tr><th>税金</th><td><%= @sum_items.having("item_type_id = 1")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 1")[0] %></td></tr>
-    <tr><th>保険</th><td><%= @sum_items.having("item_type_id = 2")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 2")[0] %></td></tr>
-    <tr><th>家賃</th><td><%= @sum_items.having("item_type_id = 4")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 4")[0] %></td></tr>
-    <tr><th>水光熱</th><td><%= @sum_items.having("item_type_id = 5")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 5")[0] %></td></tr>
-    <tr><th>食費</th><td><%= @sum_items.having("item_type_id = 3")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 3")[0] %></td></tr>
-    <tr><th>電車代</th><td><%= @sum_items.having("item_type_id = 6")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 6")[0] %></td></tr>
-    <tr><th>タクシー</th><td><%= @sum_items.having("item_type_id = 9")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 9")[0] %></td></tr>
-    <tr><th>バス</th><td><%= @sum_items.having("item_type_id = 10")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 10")[0] %></td></tr>
-    <tr><th>新幹線</th><td><%= @sum_items.having("item_type_id = 7")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 7")[0] %></td></tr>
-    <tr><th>宿泊費</th><td><%= @sum_items.having("item_type_id = 8")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 8")[0] %></td></tr>
-    <tr><th>医療費</th><td><%= @sum_items.having("item_type_id = 11")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 11")[0] %></td></tr>
-    <tr><th>通信費</th><td><%= @sum_items.having("item_type_id = 12")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 12")[0] %></td></tr>
-    <tr><th>交際費</th><td><%= @sum_items.having("item_type_id = 13")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 13")[0] %></td></tr>
-    <tr><th>趣味</th><td><%= @sum_items.having("item_type_id = 14")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 14")[0] %></td></tr>
-    <tr><th>お茶</th><td><%= @sum_items.having("item_type_id = 15")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 15")[0] %></td></tr>
-    <tr><th>セミナー</th><td><%= @sum_items.having("item_type_id = 16")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 16")[0] %></td></tr>
-    <tr><th>交流会</th><td><%= @sum_items.having("item_type_id = 17")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 17")[0] %></td></tr>
-    <tr><th>販促費</th><td><%= @sum_items.having("item_type_id = 18")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 18")[0] %></td></tr>
-    <tr><th>書籍代</th><td><%= @sum_items.having("item_type_id = 19")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 19")[0] %></td></tr>
-    <tr><th>消耗品</th><td><%= @sum_items.having("item_type_id = 20")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 20")[0] %></td></tr>
-    <tr><th>その他</th><td><%= @sum_items.having("item_type_id = 21")[0].sum_price if @sum_items && @sum_items.having("item_type_id = 21")[0] %></td></tr>
+    <tr><th>税金</th><td><%= @items.having("item_type_id = 1")[0].sum_price if @items && @items.having("item_type_id = 1")[0] %></td></tr>
+    <tr><th>保険</th><td><%= @items.having("item_type_id = 2")[0].sum_price if @items && @items.having("item_type_id = 2")[0] %></td></tr>
+    <tr><th>家賃</th><td><%= @items.having("item_type_id = 4")[0].sum_price if @items && @items.having("item_type_id = 4")[0] %></td></tr>
+    <tr><th>水光熱</th><td><%= @items.having("item_type_id = 5")[0].sum_price if @items && @items.having("item_type_id = 5")[0] %></td></tr>
+    <tr><th>食費</th><td><%= @items.having("item_type_id = 3")[0].sum_price if @items && @items.having("item_type_id = 3")[0] %></td></tr>
+    <tr><th>電車代</th><td><%= @items.having("item_type_id = 6")[0].sum_price if @items && @items.having("item_type_id = 6")[0] %></td></tr>
+    <tr><th>タクシー</th><td><%= @items.having("item_type_id = 9")[0].sum_price if @items && @items.having("item_type_id = 9")[0] %></td></tr>
+    <tr><th>バス</th><td><%= @items.having("item_type_id = 10")[0].sum_price if @items && @items.having("item_type_id = 10")[0] %></td></tr>
+    <tr><th>新幹線</th><td><%= @items.having("item_type_id = 7")[0].sum_price if @items && @items.having("item_type_id = 7")[0] %></td></tr>
+    <tr><th>宿泊費</th><td><%= @items.having("item_type_id = 8")[0].sum_price if @items && @items.having("item_type_id = 8")[0] %></td></tr>
+    <tr><th>医療費</th><td><%= @items.having("item_type_id = 11")[0].sum_price if @items && @items.having("item_type_id = 11")[0] %></td></tr>
+    <tr><th>通信費</th><td><%= @items.having("item_type_id = 12")[0].sum_price if @items && @items.having("item_type_id = 12")[0] %></td></tr>
+    <tr><th>交際費</th><td><%= @items.having("item_type_id = 13")[0].sum_price if @items && @items.having("item_type_id = 13")[0] %></td></tr>
+    <tr><th>趣味</th><td><%= @items.having("item_type_id = 14")[0].sum_price if @items && @items.having("item_type_id = 14")[0] %></td></tr>
+    <tr><th>お茶</th><td><%= @items.having("item_type_id = 15")[0].sum_price if @items && @items.having("item_type_id = 15")[0] %></td></tr>
+    <tr><th>セミナー</th><td><%= @items.having("item_type_id = 16")[0].sum_price if @items && @items.having("item_type_id = 16")[0] %></td></tr>
+    <tr><th>交流会</th><td><%= @items.having("item_type_id = 17")[0].sum_price if @items && @items.having("item_type_id = 17")[0] %></td></tr>
+    <tr><th>販促費</th><td><%= @items.having("item_type_id = 18")[0].sum_price if @items && @items.having("item_type_id = 18")[0] %></td></tr>
+    <tr><th>書籍代</th><td><%= @items.having("item_type_id = 19")[0].sum_price if @items && @items.having("item_type_id = 19")[0] %></td></tr>
+    <tr><th>消耗品</th><td><%= @items.having("item_type_id = 20")[0].sum_price if @items && @items.having("item_type_id = 20")[0] %></td></tr>
+    <tr><th>その他</th><td><%= @items.having("item_type_id = 21")[0].sum_price if @items && @items.having("item_type_id = 21")[0] %></td></tr>
     <% if @credits %>
       <% @credits.each do |credit| %>
         <tr><th><%= credit.title %></th><td><%= credit.sum_withdrawal %></td></tr>
@@ -54,4 +54,9 @@
       <tr><th>借金返済</th><td><%= @debts %></td></tr>
     <% end %>
   </thead>
+  <% if @total %>
+    <tbody class="thead-dark"> 
+      <tr><th>合計</th><td><%= @total %></td></tr>
+    </tbody>
+  <% end %>
 </table>

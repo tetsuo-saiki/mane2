@@ -4,7 +4,7 @@ class AssetTransitionsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
-    @asset_transitions = current_user.asset_transitions.order('created_at desc')
+    @asset_transitions = AssetTransition.where(id: current_user.asset_transitions.group(:user_asset_id).select("max(id)"))
     @asset_transition = current_user.asset_transitions.build
     @user_asset_id = current_user.user_assets.pluck('title', 'id')
     @date = Date.today

@@ -9,6 +9,7 @@ class AssetTransitionsController < ApplicationController
     @user_asset_id = current_user.user_assets.pluck('title', 'id')
     @date = Date.today
     @display_monthly_flow = display_monthly_flow(@date)
+    @asset_total = @asset_transitions.sum("asset_amount")
   end
   
   def create

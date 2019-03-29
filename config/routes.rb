@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'pdfs/index'
   devise_for :users
   get 'home/index'
   root to: "home#index"
@@ -10,4 +9,7 @@ Rails.application.routes.draw do
   resources :debts, only: [:index, :create, :destroy]
   resources :credit_cards, only: [:index, :create, :destroy]
   resources :amount_used_of_credits, only: [:index, :create, :destroy]
+  # pdf
+  get 'pdfs/index'
+  get 'pdfs/export', :to => 'pdfs#export', :as => :pdfs_export
 end

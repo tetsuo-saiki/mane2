@@ -19,6 +19,23 @@ class PdfsController < ApplicationController
     end
   end
 
+  def export
+    @date = Date.today
+    
+    if params[:select_date_start]
+      @start = params[:select_date_start]
+      @end = params[:select_date_end]
+    end
+
+    if @start.present? && @end.present?
+      @incomes = sum_incomes(@start, @end)
+      @items = sum_items(@start, @end)
+      @credits = sum_credits(@start, @end)
+      @debts = sum_debts(@start, @end)
+      @total = @incomes - sum_items_total(@start, @end) - sum_credits_total(@start, @end) - @debts
+    end
+  end
+
   private
 
   def sum_incomes(start_day, end_day)

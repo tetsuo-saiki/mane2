@@ -60,3 +60,7 @@
     </tbody>
   <% end %>
 </table>
+
+<% if @total %>
+  <%= link_to "PDF出力", pdfs_export_path(select_date_start: params[:select_date_start]['{}'], select_date_end: params[:select_date_end]['{}'], include_credit: params[:include_credit]['flg']), class: 'btn btn-primary btn-block' %>
+<% end %>

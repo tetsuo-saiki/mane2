@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mane2</title>
+    <%= wicked_pdf_stylesheet_link_tag 'pdfs' %>
+  </head>
+
+  <body>
+    <div class="d-flex" id="wrapper">
+      <div id="page-content-wrapper">
+        <div class="main-container">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

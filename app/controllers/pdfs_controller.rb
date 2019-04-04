@@ -10,9 +10,15 @@ class PdfsController < ApplicationController
       @end = params[:select_date_end]['{}']
     end
 
+    if params[:include_credit] && params[:include_credit]['flg'] === '1'
+      @credit = '1'
+    elsif params[:include_credit]
+      @credit = '0'
+    end
+
     if @start.present? && @end.present?
       @incomes = sum_incomes(@start, @end)
-      @items = sum_items(@start, @end)
+      @items = sum_items(@start, @end, @credit)
       @credits = sum_credits(@start, @end)
       @debts = sum_debts(@start, @end)
       @total = @incomes - sum_items_total(@start, @end) - sum_credits_total(@start, @end) - @debts
@@ -21,18 +27,39 @@ class PdfsController < ApplicationController
 
   def export
     @date = Date.today
+    @display_monthly_flow = display_monthly_flow(@date)
     
     if params[:select_date_start]
       @start = params[:select_date_start]
       @end = params[:select_date_end]
     end
 
+    if params[:include_credit] === '1'
+      @credit = '1'
+    else
+      @credit = '0'
+    end
+
     if @start.present? && @end.present?
       @incomes = sum_incomes(@start, @end)
-      @items = sum_items(@start, @end)
+      @items = sum_items(@start, @end, @credit)
       @credits = sum_credits(@start, @end)
       @debts = sum_debts(@start, @end)
       @total = @incomes - sum_items_total(@start, @end) - sum_credits_total(@start, @end) - @debts
+    end
+
+    # pdf 出力用
+    respond_to do |format|
+      format.html 
+      format.pdf do
+        # render pdf: "balance_sheet.pdf",
+        pdf = render_to_string  pdf: "balance_sheet.pdf",
+                                encoding: "UTF-8",
+                                layout: "pdf.html.erb",
+                                template: "pdfs/export.pdf.erb",
+                                page_size: "A4"
+        send_data(pdf)
+      end
     end
   end
 
@@ -42,11 +69,11 @@ class PdfsController < ApplicationController
     current_user.incomes.where("income_date between ? and ?", start_day, end_day).sum("income_amount")
   end
 
-  def sum_items(start_day, end_day)
-    if params[:include_credit] && params[:include_credit]['flg'] === '1'
+  def sum_items(start_day, end_day, credit)
+    if credit === '1'
       current_user.items.where("date between ? and ?", start_day, end_day)
         .group(:item_type_id).select("item_type_id, sum(price) as sum_price")
-    elsif params[:include_credit]
+    elsif credit === '0'
       current_user.items.where("date between ? and ?", start_day, end_day)
         .where("use_credit = 0")
         .group(:item_type_id).select("item_type_id, sum(price) as sum_price")

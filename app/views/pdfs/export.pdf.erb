@@ -1,22 +1,10 @@
+<div>
+  <h1>バランスシート</h1>
+</div>
 
-<%= form_tag('/pdfs/index', :method => :get, :class => 'mini-form-container') do %>
-　 <div class="mini-form">
-　   <%= label :select_date_start, "取得開始日", style: 'width: 30%; display: inline-block;' %>
-　   <%= date_field :select_date_start, {}, value: @start, class: 'form-control', style: 'width: 50%; display: inline-block;' %>
-　 </div>
-　 <div class="mini-form">
-　   <%= label :select_date_end, "取得終了日", style: 'width: 30%; display: inline-block;' %>
-　   <%= date_field :select_date_end, {}, value: @end, class: 'form-control', style: 'width: 50%; display: inline-block;' %>
-　 </div>
-　 <div class="mini-form-checkbox">
-    <%= check_box :include_credit, :flg %>
-    <%= label :include_credit, "カード払い分を含める", style: 'display: inline-block;' %>
-　 </div>
-  <div class="mini-form-submit">
-    <%= submit_tag "データ取得", class:'btn btn-primary' %>
-  </div>
-<% end %>
-
+<div>
+  <h2>取得期間:<%= @start %>〜<%= @end %></h2>
+</div>
 
 
 

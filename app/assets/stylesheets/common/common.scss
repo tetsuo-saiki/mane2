@@ -1,14 +1,40 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow-x: hidden;
+    background-color:#e2d7ad;
+    height: 100%;
 }
 
 a, i {
     color:rgb(100, 98, 98) !important;
 }
-a.btn {
-    color:rgb(255, 255, 255) !important;
+#sidebar-wrapper {
+    a, i {
+        color:#e2d7ad !important;
+    }
 }
+.navbar-nav {
+    a, i {
+        color:#e2d7ad !important; 
+    }
+}
+.navbar-brand {
+    color:#e2d7ad !important;
+}
+.navbar-toggler{
+    border-color: #e2d7ad !important;
+}
+.navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(226,215,173,11)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+// a.btn {
+//     color:rgb(255, 255, 255) !important;
+// }
 
 .main-container {
     margin: 10px;
@@ -45,8 +71,8 @@ a.btn {
 }
 
 div.list-group-item {
-    background-color: rgb(109, 109, 109);
-    color: #fff;
+    background-color: #e2d7ad;
+    color: #1d2b58;
 }
 
 .sidebar-heading a{
@@ -68,6 +94,14 @@ div.list-group-item {
 }
 
 #menu-toggle {
-//    background-color: rgb(173, 173, 173) !important;
-//    border-color: rgb(173, 173, 173) !important;
+   background-color: #1d2b58 !important;
+   border-color: #e2d7ad !important;
+}
+.fa-angle-right {
+    color: #e2d7ad !important;
+}
+.btn-primary {
+    background-color: #1d2b58 !important;
+    border-color: #e2d7ad !important;
+    color: #e2d7ad !important;
 }

@@ -1,7 +1,12 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow-x: hidden;
     background-color:#e2d7ad;
+    height: 100%;
 }
 
 a, i {
@@ -14,8 +19,11 @@ a, i {
 }
 .navbar-nav {
     a, i {
-        color:#e2d7ad !important;
+        color:#e2d7ad !important; 
     }
+}
+.navbar-brand {
+    color:#e2d7ad !important;
 }
 .navbar-toggler{
     border-color: #e2d7ad !important;
@@ -24,9 +32,9 @@ a, i {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(226,215,173,11)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
 }
 
-a.btn {
-    color:rgb(255, 255, 255) !important;
-}
+// a.btn {
+//     color:rgb(255, 255, 255) !important;
+// }
 
 .main-container {
     margin: 10px;
@@ -90,5 +98,10 @@ div.list-group-item {
    border-color: #e2d7ad !important;
 }
 .fa-angle-right {
+    color: #e2d7ad !important;
+}
+.btn-primary {
+    background-color: #1d2b58 !important;
+    border-color: #e2d7ad !important;
     color: #e2d7ad !important;
 }

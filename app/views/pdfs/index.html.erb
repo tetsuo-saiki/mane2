@@ -1,4 +1,4 @@
-
+<div class="main-container">
 <%= form_tag('/pdfs/index', :method => :get, :class => 'mini-form-container') do %>
 　 <div class="mini-form">
 　   <%= label :select_date_start, "取得開始日", style: 'width: 30%; display: inline-block;' %>
@@ -64,3 +64,5 @@
 <% if @total %>
   <%= link_to "PDF出力", pdfs_export_path(select_date_start: @start, select_date_end: @end, include_credit: @credit), class: 'btn btn-primary btn-block' %>
 <% end %>
+
+</div>

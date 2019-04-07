@@ -9,6 +9,10 @@ body {
     height: 100%;
 }
 
+#wrapper {
+    height: 100%;
+}
+
 a, i {
     color:rgb(100, 98, 98) !important;
 }
@@ -97,7 +101,7 @@ div.list-group-item {
    background-color: #1d2b58 !important;
    border-color: #e2d7ad !important;
 }
-.fa-angle-right {
+.fa-angle-right, .fa-angle-left {
     color: #e2d7ad !important;
 }
 .btn-primary {

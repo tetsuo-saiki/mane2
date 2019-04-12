@@ -20,10 +20,12 @@
         <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
         <% if user_signed_in? %>
           <div class="display-user-information">
-            <%= current_user.id %>:<%= current_user.email %>
+            <%= current_user.email %>
           </div>
         <% end %>
         <%= yield %>
+
+        <%= render "commons/description" %>
       </div>
     </div>
   </body>

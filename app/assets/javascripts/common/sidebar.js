@@ -31,11 +31,13 @@ $(document).on('turbolinks:load', function(){
   function dropdown_icon_change() {
     var is_smart_devise = $(window).width() <= 991;
     if(is_smart_devise){
+      $(".fa-readme").text(' 使い方');
       $(".fa-file-pdf").text(' PDF');
       $(".fa-sign-out-alt").text(' ログアウト');
       $(".fa-sign-in-alt").text(' ログイン');
       $(".fa-user-plus").text(' 登録');
     }else{
+      $(".fa-readme").text('');
       $(".fa-file-pdf").text('');
       $(".fa-sign-out-alt").text('');
       $(".fa-sign-in-alt").text('');

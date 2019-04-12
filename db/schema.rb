@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_24_074517) do
+ActiveRecord::Schema.define(version: 2019_04_08_131747) do
 
   create_table "amount_used_of_credits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "using_border", null: false
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 2019_03_24_074517) do
     t.string "item_type", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_item_types_on_user_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -128,6 +130,7 @@ ActiveRecord::Schema.define(version: 2019_03_24_074517) do
   add_foreign_key "credit_cards", "users"
   add_foreign_key "debts", "users"
   add_foreign_key "incomes", "users"
+  add_foreign_key "item_types", "users"
   add_foreign_key "items", "item_types"
   add_foreign_key "items", "users"
   add_foreign_key "monthly_flows", "users"

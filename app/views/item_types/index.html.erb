@@ -1,0 +1,68 @@
+<div class="main-container">
+<h3 class="section-title">支出カテゴリ</h3>
+
+
+<div class="modal-trigger">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#Modal">
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
+
+<table class="table">
+  <thead class="thead-light">
+    <th>支出カテゴリ</th>
+    <th></th>
+  </thead>
+  <% if @item_types %>
+    <tbody>
+      <% @item_types.each do |item_type| %>
+        <tr>
+          <td><%= item_type.item_type %></td>
+          <td><%= link_to item_type, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    There is no item_types.
+  <% end %>
+</table>
+
+<%= link_to '支出登録', items_path, class: "btn btn-light" %>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">支出カテゴリ登録</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <%= form_for(@item_type, :url => {:action => 'create'}) do |f| %>
+        <div class="modal-body">
+        
+          <% if false %>
+            <ul>
+              <%= @item_type.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+              
+          <div class="form-group">
+            <%= f.text_field :item_type, {placeholder: "食費, 交通費, etc...", class: 'form-control'} %>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+          <%= f.submit "登録", class:'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

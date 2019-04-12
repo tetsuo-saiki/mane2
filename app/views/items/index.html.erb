@@ -65,6 +65,8 @@
   <% end %>
 </table>
 
+<%= link_to '支出カテゴリ登録', item_types_path, class: "btn btn-light" %>
+
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -109,7 +111,11 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-          <%= f.submit "登録", class:'btn btn-primary' %>
+          <% if !@item_type_id.empty? %>
+            <%= f.submit "登録", class:'btn btn-primary' %>
+          <% else %>
+            <div class="no-item-type">※支出カテゴリを登録してください</div>
+          <% end %>
         </div>
       <% end %>
     </div>

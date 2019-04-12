@@ -9,7 +9,8 @@ class ItemsController < ApplicationController
     @sum_monthly_items = sum_monthly_amount_of_model(@items, "price")
 
     @item = current_user.items.build
-    @item_type_id = ItemType.pluck('item_type', 'id')
+    @item_type_id = current_user.item_types.pluck('item_type', 'id')
+
     @date = Date.today
     @display_monthly_flow = display_monthly_flow(@date)
   end

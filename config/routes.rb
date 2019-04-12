@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'home/index'
   root to: "home#index"
+  resources :item_types, only: [:index, :create, :destroy]
   resources :items, only: [:index, :create, :show, :destroy]
   resources :user_assets, only: [:index, :create, :destroy]
   resources :asset_transitions, only: [:index, :create, :destroy]

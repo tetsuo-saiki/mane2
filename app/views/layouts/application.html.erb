@@ -18,6 +18,11 @@
         <%= render "layouts/navbar" %>
         <% if notice %><p class="alert alert-light"><%= notice %></p><% end %>
         <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
+        <% if user_signed_in? %>
+          <div class="display-user-information">
+            <%= current_user.id %>:<%= current_user.email %>
+          </div>
+        <% end %>
         <%= yield %>
       </div>
     </div>

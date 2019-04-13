@@ -50,13 +50,15 @@ class PdfsController < ApplicationController
 
     # pdf 出力用
     respond_to do |format|
-      format.html 
+      format.html  { redirect_to pdfs_export_path(:select_date_start => @start,
+                                                  :select_date_end => @end,
+                                                  :include_credit => @credit,
+                                                  :format => :pdf)}
       format.pdf do
-        # render pdf: "balance_sheet.pdf",
         pdf = render_to_string  pdf: "balance_sheet.pdf",
                                 encoding: "UTF-8",
-                                layout: "pdf.html.erb",
                                 template: "pdfs/export.pdf.erb",
+                                layout: "pdf.html.erb",
                                 page_size: "A4"
         send_data(pdf)
       end

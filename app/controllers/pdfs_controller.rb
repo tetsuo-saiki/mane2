@@ -4,6 +4,7 @@ class PdfsController < ApplicationController
   def index
     @date = Date.today
     @display_monthly_flow = display_monthly_flow(@date)
+    @item_types = current_user.item_types.order('created_at asc')
     
     if params[:select_date_start]
       @start = params[:select_date_start]['{}']
@@ -15,7 +16,7 @@ class PdfsController < ApplicationController
     elsif params[:include_credit]
       @credit = '0'
     end
-
+    
     if @start.present? && @end.present?
       @incomes = sum_incomes(@start, @end)
       @items = sum_items(@start, @end, @credit)
@@ -28,6 +29,7 @@ class PdfsController < ApplicationController
   def export
     @date = Date.today
     @display_monthly_flow = display_monthly_flow(@date)
+    @item_types = current_user.item_types.order('created_at asc')
     
     if params[:select_date_start]
       @start = params[:select_date_start]

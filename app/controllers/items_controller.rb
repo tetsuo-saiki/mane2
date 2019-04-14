@@ -23,8 +23,7 @@ class ItemsController < ApplicationController
       flash[:notice] = '正常に保存しました。'
       redirect_to item_path(@item)
     else
-      @items = current_user.items.order('created_at desc')
-      # @items = current_user.items.page(params[:page]).per(10).order('created_at desc')
+      @items = current_user.items.order('date desc').paginate(page: params[:page], per_page: 5)
       flash.now[:alert] = '保存に失敗しました。'
       render 'items'
     end

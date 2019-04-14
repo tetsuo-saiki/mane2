@@ -32,3 +32,11 @@ ul.pagination li.active {
         color:#fff !important;
     }
 }
+.item-table {
+    th {
+        min-width: 120px;
+    }
+    .item-image {
+        width: 100%;
+    }
+}

@@ -68,3 +68,5 @@ gem "simple_calendar", "~> 2.0"
 gem 'rails-i18n'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'

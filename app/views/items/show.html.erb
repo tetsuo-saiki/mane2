@@ -12,7 +12,13 @@
       </tr>
       <tr>
         <th>画像</th>
-        <td><% if @item.image_url.url %><%= image_tag @item.image_url.url, class:"item-image" %><% end %></td>
+        <td>
+          <% if @item.image_url.url %>
+            <a href="<%= @item.image_url.url %>" data-lightbox="image" data-title="item-image">
+              <%= image_tag @item.image_url.url, class:"item-image" %>
+            </a>
+          <% end %>
+        </td>
       </tr>
       <tr>
         <th>日付</th>

@@ -92,6 +92,7 @@ GEM
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.10.0)
+    get_process_mem (0.2.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.6.0)
@@ -128,6 +129,9 @@ GEM
     orm_adapter (0.5.0)
     public_suffix (3.0.3)
     puma (3.12.0)
+    puma_worker_killer (0.1.0)
+      get_process_mem (~> 0.2)
+      puma (>= 2.7, < 4)
     rack (2.0.6)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -240,6 +244,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.4.4, < 0.6.0)
   puma (~> 3.11)
+  puma_worker_killer
   rails (~> 5.2.2)
   rails-i18n
   sass-rails (~> 5.0)

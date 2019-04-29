@@ -13,9 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: root
-  host: db
+  socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
@@ -49,6 +47,6 @@ test:
 #
 production:
   <<: *default
-  database: rails_new_production
-  username: rails_new
-  password: <%= ENV['RAILS_NEW_DATABASE_PASSWORD'] %>
+  database: mane2
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>

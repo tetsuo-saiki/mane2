@@ -1,7 +1,3 @@
-// Place all the styles related to the pdfs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 .mini-form-container {
     border: solid 1px;
     border-radius: 5px;
@@ -37,29 +33,25 @@
     font-family: "Noto Sans JP";
     font-weight: normal;
     font-style: normal;
-    .table{
-        border: solid 1px;
-        border-collapse: collapse;
-        // .thead-dark {
-        //     border: solid 1px;
-        // }
-        th {
-            padding-left: 10px;
-            min-width: 150px;
-            text-align: left;
-            border: solid 1px;
-            &:first-child {
-                border: solid 2px;
-            }
-        }
-        td {
-            padding-left: 10px;
-            min-width: 100px;
-            border: solid 1px;
-            &:first-child {
-                border: solid 2px;
-            }
-        }
-    }
-
+}
+.pdf-export .table{
+    border: solid 1px;
+    border-collapse: collapse;
+}
+.pdf-export .table th {
+    padding-left: 10px;
+    min-width: 150px;
+    text-align: left;
+    border: solid 1px;
+}
+.pdf-export .table th:first-child {
+    border: solid 2px;
+}
+.pdf-export .table td {
+    padding-left: 10px;
+    min-width: 100px;
+    border: solid 1px;
+}
+.pdf-export .table td:first-child {
+    border: solid 2px;
 }

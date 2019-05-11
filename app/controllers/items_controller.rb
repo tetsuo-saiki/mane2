@@ -5,8 +5,9 @@ class ItemsController < ApplicationController
 
   def index
     @selected_month = get_selected_month(params[:select_month])
-    @items = search(current_user.items, @selected_month, "date").order('date desc').paginate(page: params[:page], per_page: 5)
-    @sum_monthly_items = sum_monthly_amount_of_model(@items, "price")
+    @item_entity = search(current_user.items, @selected_month, "date")
+    @items = @item_entity.order('date desc').order('created_at desc').paginate(page: params[:page], per_page: 5)
+    @sum_monthly_items = sum_monthly_amount_of_model(@item_entity, "price")
 
     @item = current_user.items.build
     @item_type_id = current_user.item_types.pluck('item_type', 'id')

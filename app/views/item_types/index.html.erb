@@ -19,7 +19,7 @@
       <% @item_types.each do |item_type| %>
         <tr>
           <td><%= item_type.item_type %></td>
-          <td><%= link_to item_type, method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %></td>
+          <td><%= link_to item_type, method: :delete, data: { confirm: "このカテゴリに紐づく全ての支出記録が削除されます。本当に削除しますか？" }, class: 'btn btn-default' do %><i class="fas fa-times"></i><% end %></td>
         </tr>
       <% end %>
     </tbody>
@@ -28,7 +28,7 @@
   <% end %>
 </table>
 
-<%= link_to '支出登録', items_path, class: "btn btn-light" %>
+<%= link_to '支出登録', items_path, class: "btn btn-light move-outcome-button" %>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

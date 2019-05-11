@@ -9,7 +9,7 @@ class AmountUsedOfCreditsController < ApplicationController
     @sum_monthly_amount_used_of_credits = sum_monthly_amount_of_model(@amount_used_of_credits, "credit_withdrawal")
 
     @amount_used_of_credit = current_user.amount_used_of_credits.build
-    @credit_card_id = CreditCard.pluck('title', 'id')
+    @credit_card_id = current_user.credit_cards.pluck('title', 'id')
     @date = Date.today
     @display_monthly_flow = display_monthly_flow(@date)
   end

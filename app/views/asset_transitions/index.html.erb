@@ -72,7 +72,11 @@
             
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-          <%= f.submit "登録", class:'btn btn-primary' %>
+          <% if !@user_asset_id.empty? %>
+            <%= f.submit "登録", class:'btn btn-primary' %>
+          <% else %>
+            <div class="no-item-type">※資産リストを登録してください</div>
+          <% end %>
         </div>
       <% end %>
     </div>

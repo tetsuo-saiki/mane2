@@ -56,14 +56,14 @@
           <% end %>
               
           <div class="form-group">
-            <%= f.text_field :title, {placeholder: "カード名", class: 'form-control'} %>
+            <%= f.text_field :title, {placeholder: "カード名", class: 'form-control', required: true} %>
           </div>
           <div class="form-group">
             <%= f.label :use_period, "有効期限" %>
-            <%= f.date_select :use_period, {default: @date, discard_day: true}, class: 'form-control' %>
+            <%= f.date_select :use_period, {default: @date, discard_day: true, start_year: @date.year, end_year: @date.year+10}, class: 'form-control' %>
           </div>
           <div class="form-group">
-            <%= f.number_field :use_border, {placeholder: "利用枠", class: 'form-control'} %>
+            <%= f.number_field :use_border, {placeholder: "利用枠", class: 'form-control', required: true} %>
           </div>
           <div class="form-group">
             <%= f.label :withdrawal_date, "引落日" %>

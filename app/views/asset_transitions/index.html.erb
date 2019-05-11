@@ -57,11 +57,11 @@
           <% end %>
               
           <div class="form-group">
-            <%= f.number_field :asset_amount, {placeholder: "資産額", class: 'form-control'} %>
+            <%= f.number_field :asset_amount, {placeholder: "資産額", class: 'form-control', required: true} %>
           </div>
           <div class="form-group">
             <%= f.label :user_asset_id, "資産名" %>
-            <%= f.select :user_asset_id, @user_asset_id, {}, {class: 'form-control'} %>
+            <%= f.select :user_asset_id, @user_asset_id, {}, {class: 'form-control', required: true} %>
           </div>
           <div class="form-group">
             <%= f.label :date, "確認日" %><br>
@@ -72,7 +72,11 @@
             
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-          <%= f.submit "登録", class:'btn btn-primary' %>
+          <% if !@user_asset_id.empty? %>
+            <%= f.submit "登録", class:'btn btn-primary' %>
+          <% else %>
+            <div class="no-item-type">※資産リストを登録してください</div>
+          <% end %>
         </div>
       <% end %>
     </div>

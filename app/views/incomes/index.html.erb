@@ -87,10 +87,10 @@
           <% end %>
               
           <div class="form-group">
-            <%= f.text_field :title, {placeholder: "収入名", class: 'form-control'} %>
+            <%= f.text_field :title, {placeholder: "収入名", class: 'form-control', required: true} %>
           </div>
           <div class="form-group">
-            <%= f.number_field :income_amount, {placeholder: "収入額", class: 'form-control'} %>
+            <%= f.number_field :income_amount, {placeholder: "収入額", class: 'form-control', required: true} %>
           </div>
           <div class="form-group">
             <%= f.label :income_date, "日付" %>

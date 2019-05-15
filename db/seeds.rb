@@ -6,24 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# ItemType.create!(item_type: '税金')
-# ItemType.create!(item_type: '保険')
-# ItemType.create!(item_type: '食費')
-# ItemType.create!(item_type: '家賃')
-# ItemType.create!(item_type: '水道光熱費')
-# ItemType.create!(item_type: '電車')
-# ItemType.create!(item_type: '新幹線')
-# ItemType.create!(item_type: '宿泊')
-# ItemType.create!(item_type: 'タクシー')
-# ItemType.create!(item_type: 'バス')
-# ItemType.create!(item_type: '医療費')
-# ItemType.create!(item_type: '通信費')
-# ItemType.create!(item_type: '交際費')
-# ItemType.create!(item_type: '趣味')
-# ItemType.create!(item_type: 'お茶')
-# ItemType.create!(item_type: 'セミナー')
-# ItemType.create!(item_type: '交流会')
-# ItemType.create!(item_type: '販促費')
-# ItemType.create!(item_type: '書籍')
-# ItemType.create!(item_type: '消耗品')
-# ItemType.create!(item_type: 'その他')
+100.times do
+    Item.create(
+        title: Faker::Coffee.blend_name,
+        price: 333,
+        date: Faker::Date.between(2.days.ago, Date.today),
+        image_url: '',
+        item_type_id: 29,
+        user_id: 3
+    )
+end

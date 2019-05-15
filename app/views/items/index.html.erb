@@ -65,7 +65,7 @@
   <% end %>
 </table>
 
-<%= will_paginate @items, :previous_label => '前へ', :next_label => '次へ' %>
+<%= will_paginate @items, previous_label: '前へ', next_label: '次へ', inner_window: 1, outer_window: 0 %>
 
 <%= link_to '支出カテゴリ登録', item_types_path, class: "btn btn-light" %>
 

@@ -4,8 +4,8 @@
 
     <div class="list-group list-group-flush">
       <div class="list-group-item list-group-item-action"><%= @display_monthly_flow %></div>
-      <%= link_to items_path, class: "list-group-item list-group-item-action bg-light" do %><i class="fas fa-yen-sign"></i> 支出<% end %>
       <%= link_to incomes_path, class: "list-group-item list-group-item-action bg-light" do %><i class="fas fa-coins"></i> 収入<% end %>
+      <%= link_to items_path, class: "list-group-item list-group-item-action bg-light" do %><i class="fas fa-yen-sign"></i> 支出<% end %>
 <!--      <%= link_to asset_transitions_path, class: "list-group-item list-group-item-action bg-light" do %><i class="fas fa-wallet"></i> 資産<% end %> -->
       <%= link_to amount_used_of_credits_path, class: "list-group-item list-group-item-action bg-light" do %><i class="fas fa-money-check-alt"></i> カード<% end %>
       <%= link_to debts_path, class: "list-group-item list-group-item-action bg-light" do %><i class="fas fa-skull-crossbones"></i> 負債<% end %>
